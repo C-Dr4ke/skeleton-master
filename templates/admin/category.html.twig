@@ -1,0 +1,56 @@
+{% extends "panelAdmin.html.twig" %}
+
+
+{% block titre %}
+	{{ titre }}
+{% endblock %}
+
+{% block title %}
+
+	{{ parent() }}
+{% endblock %}
+
+
+{% block body %}
+
+	{{form( form ) }}
+
+
+		<table class="table table-dark mt-3">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Nom</th>
+					<th scope="col">Sous-Catégorie</th>
+					<th scope="col">Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				{% for category in categories %}
+
+
+					<tr>
+						<th scope="row">{{category.id}}</th>
+						<td>{{category.title}}</td>
+						<td>
+							<ul>
+								{% for category  in category.subCategory %}
+									<li>{{category.title}}</li>
+								{% endfor %}
+							</ul>
+						</td>
+
+						<td>
+							<a href="{{ path('editCategory',{ id:category.id }) }}"><img src="{{ asset('update.svg') }}" alt="Modifier" width="25"></a>
+							<a href="{{ path('deleteCategory',{ id:category.id }) }}" onclick="return confirm('Etes-vous sûr de vouloir supprimer cette catégorie ?') "><img src="{{ asset('delete.svg') }}" alt="Supprimer" width="25"></a>
+						</td>
+
+					</tr>
+				{% endfor %}
+
+			</tbody>
+		</table>
+
+
+	{% endblock %}

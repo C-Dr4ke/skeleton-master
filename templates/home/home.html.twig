@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+<header class="bg-light py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-black">
+            <h1 class="display-4 fw-bolder">Accueil</h1>
+
+        </div>
+    </div>
+</header>
+    <a href="{{ path('logout') }}">deconnexion</a><br>
+    <a href="{{ path('login') }}">connexion</a><br>
+    <a href="{{ path('register') }}">inscription</a>
+<!-- Section-->
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+
+
+
+
+        </div>
+    </div>
+</section>
+{% endblock %}
