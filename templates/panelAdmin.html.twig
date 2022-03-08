@@ -34,12 +34,12 @@
             </li>
             <li class="nav-item ms-2 mt-5">
                 <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                    <a href="" class="btn btn-primary  active">Gestion des menus</a>
+                    <a href="{{ path('listMenus') }}" class="btn btn-primary  active">Gestion des menus</a>
                     <div class="btn-group" role="group">
                         <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="">
-                            <a class="dropdown-item" href="">Liste des menus</a>
-                            <a class="dropdown-item" href="">Ajout de menus</a>
+                            <a class="dropdown-item" href="{{ path('listMenus') }}">Liste des menus</a>
+                            <a class="dropdown-item" href="{{ path('addMenu') }}">Ajout de menus</a>
                         </div>
                     </div>
                 </div>

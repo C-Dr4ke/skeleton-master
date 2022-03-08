@@ -4,49 +4,40 @@ namespace App\Entity;
 
 use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity(repositoryClass=ProductRepository::class)
- */
+#[ORM\Entity(repositoryClass:ProductRepository::class)]
 class Product
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type:"integer")]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type:"string", length:255)]
+    #[Assert\NotBlank(message:"Veuillez saisir ce champs")]
     private $title;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type:"string", length:255)]
+    #[Assert\NotBlank(message:"Veuillez saisir ce champs")]
     private $description;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type:"string", length:255)]
+    #[Assert\NotBlank(message:"Veuillez saisir ce champs")]
     private $protein;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Column(type:"float")]
+    #[Assert\NotBlank(message:"Veuillez saisir ce champs")]
     private $price;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type:"string", length:255)]
+    #[Assert\NotBlank(message:"Veuillez saisir ce champs")]
     private $picture;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=subCategory::class, inversedBy="products")
-     */
+    #[ORM\ManyToOne(targetEntity:SubCategory::class, inversedBy:"products")]
     private $subCategory;
 
+    public $editPicture;
     
     public function getId(): ?int
     {
@@ -113,12 +104,12 @@ class Product
         return $this;
     }
 
-    public function getSubCategory(): ?subCategory
+    public function getSubCategory(): ?SubCategory
     {
         return $this->subCategory;
     }
 
-    public function setSubCategory(?subCategory $subCategory): self
+    public function setSubCategory(?SubCategory $subCategory): self
     {
         $this->subCategory = $subCategory;
 

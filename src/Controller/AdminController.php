@@ -3,22 +3,32 @@
 namespace App\Controller;
 
 use App\Entity\Category;
+use App\Entity\Product;
 use App\Entity\SubCategory;
 use App\Form\CategoryType;
+use App\Form\ProductType;
 use App\Form\SubCategoryType;
 use App\Repository\CategoryRepository;
+use App\Repository\ProductRepository;
 use App\Repository\SubCategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminController extends AbstractController
 {
+
+    //************************************************************************************/
+    //*********************************CATEGORIES****************************************//
+    //***********************************************************************************/
+
     #[Route('/category', name: 'category')]
     #[Route('/editCategory/{id}', name: 'editCategory')]
-    public function category(Request $request, EntityManagerInterface $manager, CategoryRepository $repository, $id = null){
+    public function category(Request $request, EntityManagerInterface $manager, CategoryRepository $repository, $id = null)
+    {
 
         $categories = $repository->findAll();
 
@@ -61,6 +71,12 @@ class AdminController extends AbstractController
         $this->addFlash('success', 'Catégorie supprimée');
         return $this->redirectToRoute('category');
     }
+
+
+    //************************************************************************************/
+    //*********************************SOUS-CATEGORIES***********************************//
+    //***********************************************************************************/
+
 
     #[Route('/subcategory', name: 'subCategory')]
     #[Route('/editSubCategory/{id}', name: 'editSubCategory')]
@@ -107,7 +123,115 @@ class AdminController extends AbstractController
         $this->addFlash('success', 'sous-catégorie supprimée');
         return $this->redirectToRoute('category');
     }
+
+
+    //************************************************************************************/
+    //*********************************MENU***********************************//
+    //***********************************************************************************/
+
+
+    #[Route('/addMenu', name: 'addMenu')]
+    public function addMenu(Request $request, EntityManagerInterface $manager)
+    {
+
+        $product = new Product();
+        $form = $this->createForm(ProductType::class, $product, ['add' => true]);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $file = $form->get('picture')->getData();
+            if ($file) {
+                $fileName = date('YmdHis') . '-' . uniqid() . '-' . $file->getClientOriginalName();
+                try {
+                    $file->move($this->getParameter('upload_directory'), $fileName);
+                } catch (FileException $exception) {
+                    $this->redirectToRoute('addMenu', [
+                        'erreur' => $exception
+                    ]);
+                }
+                $product->setPicture($fileName);
+                $manager->persist($product);
+                $manager->flush();
+                $this->addFlash('success', 'Le menu a bien été enregistré');
+
+                return $this->redirectToRoute('listMenus');
+            }
+        }
+
+        return $this->render('admin/addMenu.html.twig', [
+            'form' => $form->createView(),
+            'titre' => 'Ajout de menu'
+        ]);
+    }
+
     
+   
+    #[Route('/listMenus', name: 'listMenus')]
+    public function listProduct(ProductRepository $repository)
+    {
+        $products = $repository->findAll();
+       
+        return $this->render('admin/listMenus.html.twig', [
+            'products' => $products
+        ]);
+    }
+
+
+    #[Route('/editMenu/{id}', name: 'editMenu')]
+    public function editMenu(Request $request, EntityManagerInterface $manager, Product $product)
+    {
+     
+        $form = $this->createForm(ProductType::class, $product,['edit' => true]);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $file = $form->get('editPicture')->getData();
+
+            if ($file) {
+                $fileName = date('YmdHis') . '-' . uniqid() . '-' . $file->getClientOriginalName();
+
+                try {
+                    $file->move($this->getParameter('upload_directory'), $fileName);
+                    unlink($this->getParameter('upload_directory') . '/' . $product->getPicture());
+                } catch (FileException $exception) {
+                    $this->redirectToRoute('editProduct', [
+                        'erreur' => $exception
+                    ]);
+                }
+
+                $product->setPicture($fileName);
+            }
+            $manager->persist($product);
+            $manager->flush();
+
+            $this->addFlash('success', 'Le menu a bien été modifié');
+
+            return $this->redirectToRoute('listMenus');
+        }
+
+        return $this->render('admin/editMenu.html.twig', [
+            'form' => $form->createView(),
+            'titre' => 'Modification du menu',
+            'product' => $product
+
+
+
+        ]);
+    }
+
+    #[Route('/deleteMenu/{id}', name: 'deleteMenu')]
+    public function deleteProduct(EntityManagerInterface $manager, Product $product)
+    {
+        unlink($this->getParameter('upload_directory') . '/' . $product->getPicture());
+
+        $manager->remove($product);
+        $manager->flush();
+
+        $this->addFlash('success', 'Le menu a bien été supprimé');
+        return $this->redirectToRoute('listMenus');
+    }
 
 
 }

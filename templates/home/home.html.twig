@@ -1,28 +1,52 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil{% endblock %}
+{% block title %}Accueil
+{% endblock %}
 
 {% block body %}
-<header class="bg-light py-5">
-    <div class="container px-4 px-lg-5 my-5">
-        <div class="text-center text-black">
-            <h1 class="display-4 fw-bolder">Accueil</h1>
+	<link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
-        </div>
+	<header class="bg-light py-5">
+		<div class="container px-4 px-lg-5 my-5">
+			<div class="text-center text-black">
+				<h1 class="display-4 fw-bolder">Accueil</h1>
+
+			</div>
+		</div>
+	</header>
+	<a href="{{ path('logout') }}">deconnexion</a><br>
+	<a href="{{ path('login') }}">connexion</a><br>
+	<a href="{{ path('register') }}">inscription</a>
+	<!-- Section-->
+	<section class="py-5">
+		<div class="container px-4 px-lg-5 mt-5">
+			<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"></div>
+		</div>
+	</section>
+
+	{# A faire : 
+	- Mettre la div dans une boucle pour afficher tout les produits
+	- mettre dans le href : le lien vers le detail du produit quand il sera crée
+	- mettre de le src : product.picture
+	- dans la balise h1 mettre : product.title
+	- dans la balise p mettre : product.description
+	
+	 #}
+     
+    
+	<div class="wrapper justify-content-between  ms-0  ">
+		 <a href=""/>
+		<div class="header">
+			<img src="../upload/20220308151201-622772418d65a-WaffleStoryChicken.jpg" alt="Waffle Story Chicken">
+		</div>
+
+		<h1 class="name">Spinach & Beetroot Salad</h1>
+
+		<div class="border"></div>
+
+		<p class="info">This is one of the simplest salads ever, tastes amazing and looks like you've made a real effort.</p>
+	</a>
     </div>
-</header>
-    <a href="{{ path('logout') }}">deconnexion</a><br>
-    <a href="{{ path('login') }}">connexion</a><br>
-    <a href="{{ path('register') }}">inscription</a>
-<!-- Section-->
-<section class="py-5">
-    <div class="container px-4 px-lg-5 mt-5">
-        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+        
 
-
-
-
-        </div>
-    </div>
-</section>
 {% endblock %}

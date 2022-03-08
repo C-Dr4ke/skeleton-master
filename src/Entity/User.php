@@ -9,67 +9,53 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-/**
- * @ORM\Entity(repositoryClass=UserRepository::class)
- */
+
+#[ORM\Entity(repositoryClass:UserRepository::class)]
 class User implements PasswordAuthenticatedUserInterface, UserInterface
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type:"integer")]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=180, unique=true)
-     */
+    
+    #[ORM\Column(type:"string", length:180, unique:true)]
     private $email;
 
-    /**
-     * @ORM\Column(type="json")
-     */
+    
+    #[ORM\Column(type:"json")]
     private $roles = ['ROLE_USER'];
 
     /**
      * @var string The hashed password
-     * @ORM\Column(type="string")
      */
+    #[ORM\Column(type:"string")]
     private $password;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type:"string", length:255)]
     private $lastname;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type:"string", length:255)]
     private $firstname;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
+  
+    #[ORM\Column(type:"integer", nullable:true)]
     private $phone;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
+    #[ORM\Column(type:"integer", nullable:true)]
     private $streetNumber;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+ 
+    #[ORM\Column(type:"string", length:255, nullable:true)]
     private $street;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
+    
+    #[ORM\Column(type:"integer", nullable:true)]
     private $zipCode;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+   
+    #[ORM\Column(type:"string", length:255, nullable:true)]
     private $city;
 
 
