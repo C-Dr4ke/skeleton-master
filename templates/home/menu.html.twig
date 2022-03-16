@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos Menus
+{% endblock %}
+
+{% block body %}
+	<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
+	<header class="bg-light py-5">
+		<div class="container px-4 px-lg-5 my-5">
+			<div class="text-center text-black">
+				<h2 class="display-4 fw-bolder">Nos Menus</h2>
+
+			</div>
+		</div>
+	</header>
+	
+	<!-- Section-->
+	<section class="py-5">
+		<div class="container px-4 px-lg-5 mt-5">
+			<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"></div>
+		</div>
+	</section>
+
+
+    <h2> Formules Midi</h2>
+	<div class="row  justify-content-between  mt-3">
+
+		{% for product in products %}
+        {% if product.subCategory.title == "Formules Midi" %}
+           
+		    <div class="wrapper ms-0">
+				<a href="{{path('detailProduct', { id: product.id}) }}"/>
+					<div class="header">
+						<img src="{{ asset('upload/') }}{{ product.picture }}" alt="{{ product.title }}">
+					</div>
+					<h1 class="name">{{ product.title }}</h1>
+					<div class="border"></div>
+				</a>
+			</div>
+        {% endif %}
+		{% endfor %}
+	</div>
+
+    <h2> Menu XXL</h2>
+	<div class="row  justify-content-between  mt-3">
+
+		{% for product in products %}
+        {% if product.subCategory.title == "Menu XXL" %}
+           
+		    <div class="wrapper ms-0">
+				<a href="{{path('detailProduct', { id: product.id}) }}"/>
+					<div class="header">
+						<img src="{{ asset('upload/') }}{{ product.picture }}" alt="{{ product.title }}">
+					</div>
+					<h1 class="name">{{ product.title }}</h1>
+					<div class="border"></div>
+				</a>
+			</div>
+        {% endif %}
+		{% endfor %}
+	</div>
+
+     <h2> Menus Crêpes Salées Signatures</h2>
+	<div class="row  justify-content-between  mt-3">
+
+		{% for product in products %}
+        {% if product.subCategory.title == "Menus Crêpes Salées Signatures" %}
+           
+		    <div class="wrapper ms-0">
+				<a href="{{path('detailProduct', { id: product.id}) }}"/>
+					<div class="header">
+						<img src="{{ asset('upload/') }}{{ product.picture }}" alt="{{ product.title }}">
+					</div>
+					<h1 class="name">{{ product.title }}</h1>
+					<div class="border"></div>
+				</a>
+			</div>
+        {% endif %}
+		{% endfor %}
+	</div>
+     <h2> Menu Chicken</h2>
+	<div class="row  justify-content-between  mt-3">
+
+		{% for product in products %}
+        {% if product.subCategory.title == "Menu Chicken" %}
+           
+		    <div class="wrapper ms-0">
+				<a href="{{path('detailProduct', { id: product.id}) }}"/>
+					<div class="header">
+						<img src="{{ asset('upload/') }}{{ product.picture }}" alt="{{ product.title }}">
+					</div>
+					<h1 class="name">{{ product.title }}</h1>
+					<div class="border"></div>
+				</a>
+			</div>
+        {% endif %}
+		{% endfor %}
+	</div>
+{% endblock %}

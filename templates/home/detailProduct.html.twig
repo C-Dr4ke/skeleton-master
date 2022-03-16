@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Detail du Menu
+{% endblock %}
+
+{% block body %}
+<link rel="stylesheet" href="{{ asset('css/detailProduct.css') }}">
+
+<div class="menu">
+	<section class="product-presentation">
+		<div class="columns is-medium">
+			<div class="column is-6-medium">
+				<div class="picture">
+					<div
+						class="responsive-img">
+						<!---->
+						<figure class="responsive-img-figureLoaded">
+							<picture>
+								<img src="{{ asset('upload/') }}{{ product.picture }}" alt="{{ product.title }}" width="600"></picture>
+							<!---->
+							<!---->
+						</figure>
+					</div>
+				</div>
+			</div>
+			<div data-test-id="product-title" class="content column is-5-medium is-offset-1-medium">
+				<h1>
+					{{ product.title }}
+				</h1>
+
+				<p class="description"> {{product.description}}</p>
+				<!---->
+				<a href="" class="cta cta-primary">
+					Commander
+
+					<!---->
+				</a>
+			</div>
+		</div>
+	</section>
+</div>
+{% endblock %}

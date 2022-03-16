@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil
+{% block title %}Nos Snack
 {% endblock %}
 
 {% block body %}
@@ -9,14 +9,12 @@
 	<header class="bg-light py-5">
 		<div class="container px-4 px-lg-5 my-5">
 			<div class="text-center text-black">
-				<h1 class="display-4 fw-bolder">Accueil</h1>
+				<h2 class="display-4 fw-bolder">Nos Snack</h2>
 
 			</div>
 		</div>
 	</header>
-	<a href="{{ path('logout') }}">deconnexion</a><br>
-	<a href="{{ path('login') }}">connexion</a><br>
-	<a href="{{ path('register') }}">inscription</a>
+	
 	<!-- Section-->
 	<section class="py-5">
 		<div class="container px-4 px-lg-5 mt-5">
@@ -24,20 +22,14 @@
 		</div>
 	</section>
 
-	{# A faire : 
-		- Mettre la div dans une boucle pour afficher tout les produits
-		- mettre dans le href : le lien vers le detail du produit quand il sera crée
-		- mettre de le src : product.picture
-		- dans la balise h1 mettre : product.title
-		- dans la balise p mettre : product.description
-		
-		 #}
 
-
+    <h2> Petite Faim</h2>
 	<div class="row  justify-content-between  mt-3">
 
 		{% for product in products %}
-			<div class="wrapper ms-0">
+        {% if product.subCategory.title == "Petite Faim" %}
+           
+		    <div class="wrapper ms-0">
 				<a href=""/>
 					<div class="header">
 						<img src="{{ asset('upload/') }}{{ product.picture }}" alt="{{ product.title }}">
@@ -47,6 +39,8 @@
 					<p class="info">{{product.description}}</p>
 				</a>
 			</div>
+        {% endif %}
 		{% endfor %}
 	</div>
+
 {% endblock %}

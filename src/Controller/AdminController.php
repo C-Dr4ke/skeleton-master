@@ -15,11 +15,19 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminController extends AbstractController
 {
+    // Permet de stocker des informations en session (il faudra essayer de comprendre comment cela fonctionne avant le jury)
+    private $requestStack;
+
+    public function __construct(RequestStack $requestStack)
+    {
+        $this->requestStack = $requestStack;
+    }
 
     //************************************************************************************/
     //*********************************CATEGORIES****************************************//
@@ -31,7 +39,7 @@ class AdminController extends AbstractController
     {
 
         $categories = $repository->findAll();
-
+      
         if (!empty($id)) {
             $category = $repository->find($id);
         } else {
@@ -84,7 +92,7 @@ class AdminController extends AbstractController
     {
 
         $subCategories = $repository->findAll();
-
+        
         if (!empty($id)) {
             $subCategory = $repository->find($id);
         } else {
@@ -133,11 +141,12 @@ class AdminController extends AbstractController
     #[Route('/addMenu', name: 'addMenu')]
     public function addMenu(Request $request, EntityManagerInterface $manager)
     {
-
+      
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product, ['add' => true]);
         $form->handleRequest($request);
-
+      
+        
         if ($form->isSubmitted() && $form->isValid()) {
 
             $file = $form->get('picture')->getData();
