@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProductRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -38,6 +40,14 @@ class Product
     private $subCategory;
 
     public $editPicture;
+
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: Detail::class)]
+    private $details;
+
+    public function __construct()
+    {
+        $this->details = new ArrayCollection();
+    }
     
     public function getId(): ?int
     {
@@ -112,6 +122,36 @@ class Product
     public function setSubCategory(?SubCategory $subCategory): self
     {
         $this->subCategory = $subCategory;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Detail>
+     */
+    public function getDetails(): Collection
+    {
+        return $this->details;
+    }
+
+    public function addDetail(Detail $detail): self
+    {
+        if (!$this->details->contains($detail)) {
+            $this->details[] = $detail;
+            $detail->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDetail(Detail $detail): self
+    {
+        if ($this->details->removeElement($detail)) {
+            // set the owning side to null (unless already changed)
+            if ($detail->getProduct() === $this) {
+                $detail->setProduct(null);
+            }
+        }
 
         return $this;
     }

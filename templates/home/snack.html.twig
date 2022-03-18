@@ -30,7 +30,7 @@
         {% if product.subCategory.title == "Petite Faim" %}
            
 		    <div class="wrapper ms-0">
-				<a href=""/>
+				<a href="{{path('detailProduct', { id: product.id}) }}"/>
 					<div class="header">
 						<img src="{{ asset('upload/') }}{{ product.picture }}" alt="{{ product.title }}">
 					</div>

@@ -30,7 +30,13 @@
 
 				<p class="description"> {{product.description}}</p>
 				<!---->
-				<a href="" class="cta cta-primary">
+
+				<h1>
+					Prix
+				</h1>
+				<p class="description"> {{product.price}}€</p>
+
+				<a href="{{ path('addCart', {'id': product.id,  param: 'detail' }) }}" class="cta cta-primary">
 					Commander
 
 					<!---->
