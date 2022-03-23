@@ -64,14 +64,15 @@ class PanierService
      return $panierWithData;
     }
 
-    public function getTotal() : float {
+    public function getTotal() {
 
-        $total = 0;
+     $total = 0;  
 
      foreach($this->getFullCart() as $item){
-         $total = $item['product']->getPrice()*$item['quantity'];
-        
+         $totalItem = $item['product']->getPrice()*$item['quantity'];
+         $total += $totalItem ;
      }
+    //  dd($total);
      return $total;
     }
 
@@ -92,5 +93,12 @@ class PanierService
         $this->session->set('panier', $panier);
 
         
+    }
+
+    public function destroy()
+    {
+        $this->session->remove('panier');
+
+
     }
 }

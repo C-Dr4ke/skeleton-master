@@ -2,11 +2,19 @@
 
 namespace App\Controller;
 
+use App\Entity\Delivery;
+use App\Entity\Detail;
+use App\Entity\Order;
 use App\Entity\Product;
+use App\Form\RegistrationType;
 use App\Repository\CategoryRepository;
+use App\Repository\OrderRepository;
 use App\Repository\ProductRepository;
 use App\Repository\SubCategoryRepository;
+use App\Repository\UserRepository;
 use App\Service\Panier\PanierService;
+use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -142,9 +150,9 @@ class HomeController extends AbstractController
         $affiche = true;
         
      $panierWithData = $panierService->getFullCart();
- 
+    $total =0;
      $total = $panierService->getTotal();
-
+     
     
     //  dd($panierWithData);
      return $this->render('home/cart.html.twig',[ 
@@ -164,9 +172,10 @@ class HomeController extends AbstractController
     
     if ($param == 'cart') {
         return $this->redirectToRoute('cart');
-    } else {
-        return $this->redirectToRoute('home');
     }
+    //  else {
+    //     return $this->redirectToRoute('carte');
+    // }
      }
  
      #[Route('/deleteCart/{id}', name: 'deleteCart')]
@@ -185,5 +194,138 @@ class HomeController extends AbstractController
 
         return $this->redirectToRoute('cart');
     }
+
+
+     
+    #[Route('/destroyCart', name: 'destroyCart')]
+    public function destroyCart(Request $request, PanierService $panierService)
+    {
+        //$request->cookies->set('panierDestroy',$panierService->fullCart());
+
+        $panierService->destroy();
+
+        return $this->redirectToRoute('home');
+    }
+     //************************************************************************************/
+    //*********************************Profil ***********************************//
+    //***********************************************************************************/
+
+   
+    #[Route('/profil/{id}', name: 'profil')]
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
+    public function profil(UserRepository $repository)
+    {
+
+
+
+        return $this->render('home/profil.html.twig', []);
+    }
+
+     
+    #[Route('/modifProfil/{id}', name: 'modifProfil')]
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
+    public function modifProfil(Request $request, EntityManagerInterface $manager, UserRepository $repository, $id)
+    {   
+      
+        $user = $repository->find($id);
+        $form = $this->createForm(RegistrationType::class, $user, ['edit' => true]);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+    
+            $manager->persist($user);
+            $manager->flush();
+            $this->addFlash('success', 'Informations modifiées');
+            return $this->redirectToRoute('profil');
+        }
+
+        return $this->render('home/modifProfil.html.twig', [
+            'form' => $form->createView(),
+            'titre' => 'Informations du profil',
+        ]);
+    }
+
+    #[Route('/mesCommandes/{id}', name: 'mesCommandes')]
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
+    public function mesCommandes(OrderRepository $repository, $id)
+    {   
+      
+        $orders = $repository->findBy(['user' => $id]);
+    //    dd($orders);
+
+      
+
+        return $this->render('home/mesCommandes.html.twig', [
+            'orders' => $orders,
+            'titre' => 'Mes commandes',
+        ]);
+    }
+
+    #[Route('/detailMaCommande/{id}', name: 'detailMaCommande')]
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
+    public function detailMaCommandes(OrderRepository $orderRepository, $id)
+    {   
+      
+        $order = $orderRepository->find($id);
+
+    //    dd($orders);
+
+      
+
+        return $this->render('home/detailMaCommande.html.twig', [
+            'order' => $order,
+            'titre' => 'Suivi de ma commande',
+        ]);
+    }
+
+
+    //************************************************************************************//
+    //*********************************Commande ***********************************//
+    //***********************************************************************************//
+
+    /**
+     * @Route("/order", name="order")
+     * @IsGranted("IS_AUTHENTICATED_FULLY")
+     * 
+     */
+    public function order(EntityManagerInterface $manager, PanierService $panierService)
+    {
+        
+        $panier = $panierService->getFullCart();
+       
+        $order = new Order();
+        $order->setUser($this->getUser());
+        $order->setDate(new \DateTime());
+
+       
+        
+
+        $delivery = new Delivery();
+
+        $delivery->setStatus("En attente de la Préparation");
+        $delivery->setDeliveryDate(new \DateTime('now'));
+        $order->setDelivery($delivery);
+
+        foreach ($panier as $item => $value) :
+            //dd($value['product']);
+            $achat = new Detail();
+            $achat->setProduct($value['product']);
+            $achat->setQuantity($value['quantity']);
+            $achat->setOrders($order);
+            $manager->merge($achat);
+
+        endforeach;
+
+
+        $manager->persist($order);
+        $manager->persist($delivery);
+        $manager->flush();
+        $panierService->destroy();
+        $this->addFlash('success', "Merci pour votre commande, Votre plat vous sera bientot livré, vous pouvez suivre l'état de votre commande dans votre espace membre");
+
+        return $this->redirectToRoute('home', []);
+    }
+
 
 }

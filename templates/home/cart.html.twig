@@ -47,11 +47,11 @@
        
          <h3>Total : <span >{{ total }}</span> €</h3>
 
-        {# <a href="{{ path('destroyCart') }}" class="btn btn-danger mt-5"  onclick="return confirm('Etes-vous de vouloir supprimer cet article de votre panier')"  >Vider le panier</a> #}
+        <a href="{{ path('destroyCart') }}" class="btn btn-danger mt-5"  onclick="return confirm('Etes-vous de vouloir supprimer cet article de votre panier')"  >Vider le panier</a>
 
         {% if app.user %}
 
-            {# <a href="{{ path('order') }}" class="btn btn-warning mt-5">Passer à la commande</a> #}
+            <a href="{{ path('order') }}" class="btn btn-warning mt-5">Passer à la commande</a>
         {% else %}
 
             <a href="{{ path('login') }}" class="btn btn-warning mt-5">Connectez vous pour passer à la commande</a>

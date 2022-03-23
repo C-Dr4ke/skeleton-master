@@ -9,6 +9,8 @@ use App\Form\CategoryType;
 use App\Form\ProductType;
 use App\Form\SubCategoryType;
 use App\Repository\CategoryRepository;
+use App\Repository\DeliveryRepository;
+use App\Repository\OrderRepository;
 use App\Repository\ProductRepository;
 use App\Repository\SubCategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -242,5 +244,49 @@ class AdminController extends AbstractController
         return $this->redirectToRoute('listMenus');
     }
 
+     //************************************************************************************/
+    //*********************************Commande***********************************//
+    //***********************************************************************************/
 
+    
+    #[Route('/orderList', name: 'orderList')]
+    public function orderList(OrderRepository $repository)
+    {
+
+        $orders = $repository->findAll();
+
+        return $this->render('admin/orderList.html.twig', [
+            'orders' => $orders
+        ]);
+    }
+
+     /**
+     *@Route("/orderDetail/{id}", name="orderDetail")
+     *
+     */
+    #[Route('/orderDetail/{id}', name: 'orderDetail')]
+    public function orderDetail(OrderRepository $orderRepository, DeliveryRepository $deliveryRepository, Request $request, EntityManagerInterface $manager, $id)
+    {
+
+        $order = $orderRepository->find($id);
+
+        if (!empty($_POST)) {
+
+            $delivery = $order->getDelivery();
+            $deliveryDate = $request->request->get('deliveryDate');
+            $status = $request->request->get('status');
+            $delivery->setDeliveryDate(new \DateTime($deliveryDate));
+            $delivery->setStatus($status);
+            $manager->persist($delivery);
+            $manager->flush();
+            $this->addFlash('success', 'Statut mise à jour');
+            return $this->render('admin/orderDetail.html.twig', [
+                'order' => $order,
+            ]);
+        }
+
+        return $this->render('admin/orderDetail.html.twig', [
+            'order' => $order,
+        ]);
+    }
 }

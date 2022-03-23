@@ -25,6 +25,9 @@ class Order
     #[ORM\OneToMany(mappedBy: 'orders', targetEntity: Detail::class)]
     private $details;
 
+    #[ORM\OneToOne(inversedBy: 'orders', targetEntity: Delivery::class, cascade: ['persist', 'remove'])]
+    private $delivery;
+
     public function __construct()
     {
         $this->details = new ArrayCollection();
@@ -85,6 +88,18 @@ class Order
                 $detail->setOrders(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDelivery(): ?Delivery
+    {
+        return $this->delivery;
+    }
+
+    public function setDelivery(?Delivery $delivery): self
+    {
+        $this->delivery = $delivery;
 
         return $this;
     }

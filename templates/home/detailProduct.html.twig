@@ -36,13 +36,36 @@
 				</h1>
 				<p class="description"> {{product.price}}€</p>
 
-				<a href="{{ path('addCart', {'id': product.id,  param: 'detail' }) }}" class="cta cta-primary">
+				<button type="button" href="{{ path('addCart', {'id': product.id,  param: 'detail' }) }}" data-bs-toggle="modal" data-bs-target="#choiceConfirm" class="cta cta-primary">
 					Commander
 
 					<!---->
-				</a>
+				</button>
 			</div>
 		</div>
 	</section>
 </div>
+
+
+
+{# Modal #}
+<div class="modal fade text-center" id="choiceConfirm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content rounded-3">
+      <div class="modal-header">
+        <p class="modal-title" id="exampleModalLabel"><i class="fa-solid fa-trash-can"></i> CONFIRMATION</p>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <small>Envie d'un dessert ?</small> 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary btn-sm rounded" data-bs-dismiss="modal"><i class="fa-solid fa-ban"></i> &nbsp;Annuler</button>
+        <a href="{{ path('deleteItem', { id:item.id }) }}" class="btn btn-danger btn-sm rounded text-decoration-none"><i class="fa-solid fa-trash-can"></i> &nbsp;Supprimer</a>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
+
+

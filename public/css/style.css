@@ -59,3 +59,12 @@ html, body {
       letter-spacing: 0.1em;
       padding: 30px;
    }
+
+   .invisible{
+      display:none;
+   }
+
+   .lighter{
+      color: white !important;
+      background: black !important;
+  }

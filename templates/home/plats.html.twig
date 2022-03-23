@@ -5,7 +5,17 @@
 
 {% block body %}
 	<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+	   <div class="mb-2">
+            <a href="javascript:void(0)" type="button"
+               class="btn btn-outline-secondary rounded B">Boeuf</a>
+            <a href="javascript:void(0)" type="button"
+               class="btn btn-outline-secondary rounded mx-2 P">Poisson</a>
+            <a href="javascript:void(0)" type="button"
+               class="btn btn-outline-secondary rounded PT">Poulet</a>
+			   <a href="javascript:void(0)" type="button"
+               class="btn btn-outline-secondary rounded V">Veggie</a>
 
+    </div>
 	<header class="bg-light py-5">
 		<div class="container px-4 px-lg-5 my-5">
 			<div class="text-center text-black">
@@ -21,7 +31,17 @@
 			<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"></div>
 		</div>
 	</section>
+	 <div class="mb-2">
+            <a href="javascript:void(0)" type="button"
+               class="btn btn-outline-secondary rounded B">Boeuf</a>
+            <a href="javascript:void(0)" type="button"
+               class="btn btn-outline-secondary rounded mx-2 P">Poisson</a>
+            <a href="javascript:void(0)" type="button"
+               class="btn btn-outline-secondary rounded PT">Poulet</a>
+			   <a href="javascript:void(0)" type="button"
+               class="btn btn-outline-secondary rounded V">Veggie</a>
 
+    </div>
 
     <h2> Waffles Salés</h2>
 	<div class="row  justify-content-between  mt-3">
@@ -29,7 +49,7 @@
 		{% for product in products %}
         {% if product.subCategory.title == "Waffles Salés" %}
            
-		    <div class="wrapper ms-0">
+		    <div class="wrapper ms-0 {{ product.protein }}">
 				<a href="{{path('detailProduct', { id: product.id}) }}"/>
 					<div class="header">
 						<img src="{{ asset('upload/') }}{{ product.picture }}" alt="{{ product.title }}">
@@ -48,7 +68,7 @@
 		{% for product in products %}
         {% if product.subCategory.title == "Waffles Salés Signatures" %}
            
-		    <div class="wrapper ms-0">
+		    <div class="wrapper ms-0 {{ product.protein }}">
 				<a href="{{path('detailProduct', { id: product.id}) }}"/>
 					<div class="header">
 						<img src="{{ asset('upload/') }}{{ product.picture }}" alt="{{ product.title }}">
@@ -67,7 +87,7 @@
 		{% for product in products %}
         {% if product.subCategory.title == "Crêpes Salées Signatures" %}
            
-		    <div class="wrapper ms-0">
+		    <div class="wrapper ms-0 {{ product.protein }}">
 				<a href="{{path('detailProduct', { id: product.id}) }}"/>
 					<div class="header">
 						<img src="{{ asset('upload/') }}{{ product.picture }}" alt="{{ product.title }}">
@@ -85,7 +105,7 @@
 		{% for product in products %}
         {% if product.subCategory.title == "Compositions salées" %}
            
-		    <div class="wrapper ms-0">
+		    <div class="wrapper ms-0 {{ product.protein }}">
 				<a href="{{path('detailProduct', { id: product.id}) }}"/>
 					<div class="header">
 						<img src="{{ asset('upload/') }}{{ product.picture }}" alt="{{ product.title }}">
@@ -97,4 +117,7 @@
         {% endif %}
 		{% endfor %}
 	</div>
+	<script src="{{ asset('js/filtre.js') }}"></script>
+	   
+
 {% endblock %}

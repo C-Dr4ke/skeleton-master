@@ -69,11 +69,11 @@
             </li>
             <li class="nav-item ms-2 mt-3">
                 <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                    <a href="" class="btn btn-primary  active">Gestion des commandes</a>
+                    <a href="{{ path('orderList') }}" class="btn btn-primary  active">Gestion des commandes</a>
                     <div class="btn-group" role="group">
                         <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="">
-                            <a class="dropdown-item" href="">Liste des commandes</a>
+                            <a class="dropdown-item" href="{{ path('orderList') }}">Liste des commandes</a>
                         </div>
                     </div>
                 </div>

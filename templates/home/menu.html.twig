@@ -29,7 +29,7 @@
 		{% for product in products %}
         {% if product.subCategory.title == "Formules Midi" %}
            
-		    <div class="wrapper ms-0">
+		    <div class="wrapper ms-0 {{ product.protein }}">
 				<a href="{{path('detailProduct', { id: product.id}) }}"/>
 					<div class="header">
 						<img src="{{ asset('upload/') }}{{ product.picture }}" alt="{{ product.title }}">
@@ -48,7 +48,7 @@
 		{% for product in products %}
         {% if product.subCategory.title == "Menu XXL" %}
            
-		    <div class="wrapper ms-0">
+		    <div class="wrapper ms-0 {{ product.protein }}">
 				<a href="{{path('detailProduct', { id: product.id}) }}"/>
 					<div class="header">
 						<img src="{{ asset('upload/') }}{{ product.picture }}" alt="{{ product.title }}">
@@ -67,7 +67,7 @@
 		{% for product in products %}
         {% if product.subCategory.title == "Menus Crêpes Salées Signatures" %}
            
-		    <div class="wrapper ms-0">
+		    <div class="wrapper ms-0 {{ product.protein }}">
 				<a href="{{path('detailProduct', { id: product.id}) }}"/>
 					<div class="header">
 						<img src="{{ asset('upload/') }}{{ product.picture }}" alt="{{ product.title }}">
@@ -85,7 +85,7 @@
 		{% for product in products %}
         {% if product.subCategory.title == "Menu Chicken" %}
            
-		    <div class="wrapper ms-0">
+		    <div class="wrapper ms-0 {{ product.protein }}">
 				<a href="{{path('detailProduct', { id: product.id}) }}"/>
 					<div class="header">
 						<img src="{{ asset('upload/') }}{{ product.picture }}" alt="{{ product.title }}">
@@ -97,4 +97,5 @@
         {% endif %}
 		{% endfor %}
 	</div>
+	<script src="{{ asset('js/filtre.js') }}"></script>
 {% endblock %}

@@ -45,7 +45,8 @@ class ProductType extends AbstractType
                     'Boeuf' => 'Boeuf',
                     'Poisson' => 'Poisson',
                     'Poulet' => 'Poulet',
-                    'Veggie'=>  'Veggie'
+                    'Veggie'=>  'Veggie',
+                    'Aucun'=> 'Aucun'
                 ],
                
             ])
@@ -66,7 +67,8 @@ class ProductType extends AbstractType
                             "image/png",
                             "image/jpg",
                             "image/jpeg",
-                            "image/svg"
+                            "image/svg",
+                            "image/webp",
 
                         ],
                         'mimeTypesMessage' => 'Extensions autorisées: PNG, JPG, JPEG, SVG'
@@ -109,7 +111,8 @@ class ProductType extends AbstractType
                     'Boeuf' => 'Boeuf',
                     'Poisson' => 'Poisson',
                     'Poulet' => 'Poulet',
-                    'Veggie'=>  'Veggie'
+                    'Veggie'=>  'Veggie',
+                    'Aucun'=> 'Aucun'
                 ]
 
             ])

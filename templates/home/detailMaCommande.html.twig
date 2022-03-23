@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+	<div class="border border-dark border-3 text-center rounbded p-3 mb-3">
+		<h5>Informations</h5>
+		<div class="row justify-content-around mt-3">
+			<div class="col-md-6 border-dark border-end-4">
+				<h6 class="fw-bold">Informations client:</h6>
+				<p>Nom:
+					{{order.user.lastName}}</p>
+				<p>Prénom:
+					{{order.user.firstName}}</p>
+				<p>N° de Voie:
+					{{order.user.streetNumber}}</p>
+				<p>Voie:
+					{{order.user.street}}</p>
+				<p>Code Postal:
+					{{order.user.zipCode}}</p>
+				<p>Ville:
+					{{order.user.city}}</p>
+				<p>Email:
+					{{order.user.email}}</p>
+				<p>Téléphone: 0{{order.user.phone}}</p>
+
+
+			</div>
+		  <div class="col-md-6"><h6 class="fw-bold">Statut de livraison:</h6>
+
+               
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Date de livraison</label>
+                        <p>Date prévu de livraison: {{ order.delivery.deliveryDate | date('d-m-Y') }}</p>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Statut</label>
+                    <p>Statut: {{order.delivery.status}}</p>
+                     </div>
+                
+            </div>
+        </div>
+
+	</div>
+	<table class="table table-dark">
+		<thead>
+			<tr>
+				<th scope="col">Nom</th>
+				<th scope="col">Prix</th>
+				<th scope="col">Descriptif</th>
+				<th scope="col">Photo</th>
+				<th scope="col">Quantité</th>
+				<th scope="col">Montant total</th>
+
+
+			</tr>
+		</thead>
+		<tbody>
+            {% set totalFinal = 0 %}
+			{% for detail  in  order.details %}
+
+
+				<tr>
+					<td>{{ detail.product.title }}</td>
+					<td>{{ detail.product.price | format_currency('EUR') }}</td>
+					<td>{{ detail.product.description | slice(0,15) ~ '...' }}</td>
+					<td>
+						<img src="{{ asset('upload/') }}{{ detail.product.picture }}" width="50" alt="{{ detail.product.title }}">
+					</td>
+					{% set total = detail.product.price * detail.quantity %}
+
+					<td>{{  detail.quantity }}</td>
+					<td>{{ total | format_currency('EUR') }}</td>
+                     {% set totalFinal = totalFinal + total %}
+				</tr>
+
+			{% endfor %}
+		</tbody>
+	</table>
+    <h3>Total : <span >{{ totalFinal }}</span> €</h3>
+
+
+{% endblock %}
+
+{% block title %}
+	{{ parent() }}Informations sur la commande
+{% endblock %}
+
+
+{% block titre %}
+
+	Informations sur la commande
+{% endblock %}

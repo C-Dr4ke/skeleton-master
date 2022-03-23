@@ -1,0 +1,121 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<link rel="stylesheet" href="{{ asset('css/profil.css') }}">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+
+<body>
+  <div class="main-content">
+    <div class="container mt-7">
+      <!-- Table -->
+   
+      <div class="row">
+        <div class="col-xl-8 m-auto order-xl-1">
+          <div class="card bg-secondary shadow">
+            <div class="card-header bg-white border-0">
+              <div class="row align-items-center">
+                <div class="col-8">
+                  <h3 class="mb-0">Mon Profil</h3>
+                </div>
+                <div class="col-4 text-right">
+                  <a href="{{ path('modifProfil', { id:app.user.id }) }}" class="btn btn-sm btn-primary">Modifier Mon Profil</a>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <form>
+                <h6 class="heading-small text-muted mb-4">Information de l'utilisateur</h6>
+                <div class="pl-lg-4">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group focused">
+                        <label class="form-control-label" for="input-email">Email</label>
+                        <input type="text" id="input-email" class="form-control form-control-alternative" placeholder="Email" value="{{ app.user.email }}">
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-email">Mot de passe</label>
+                        <input type="password" id="password" class="form-control form-control-alternative" placeholder="**********">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group focused">
+                        <label class="form-control-label" for="input-first-name">Prénom</label>
+                        <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="Prénom" value="{{ app.user.firstName }}">
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group focused">
+                        <label class="form-control-label" for="input-last-name">Nom</label>
+                        <input type="text" id="input-last-name" class="form-control form-control-alternative" placeholder="Nom de famille" value="{{ app.user.LastName }}">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr class="my-4">
+                <!-- Address -->
+                <h6 class="heading-small text-muted mb-4">Informations de contact</h6>
+                <div class="pl-lg-4">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group focused">
+                        <label class="form-control-label" for="input-address">Adresse</label>
+                        <input id="input-address" class="form-control form-control-alternative" placeholder="Adresse" value="{{ app.user.streetNumber }} rue {{ app.user.street}} " type="text">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-4">
+                      <div class="form-group focused">
+                        <label class="form-control-label" for="input-city">Ville</label>
+                        <input type="text" id="input-city" class="form-control form-control-alternative" placeholder="Ville" value="{{ app.user.city }}">
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="form-group focused">
+                        <label class="form-control-label" for="input-zipCode">Code postal</label>
+                        <input type="text" id="input-zipCode" class="form-control form-control-alternative" placeholder="Code Postal" value="{{ app.user.zipCode }}">
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-phone">Téléphone</label>
+                        <input type="number" id="input-postal-code" class="form-control form-control-alternative" placeholder="téléphone" value="0{{ app.user.phone }}">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr class="my-4">
+                <!-- Description -->
+               
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+</body>
+
+		
+
+
+		
+	
+
+
+{% endblock %}
+
+{% block title %}
+	{{ parent() }}Information du profil
+{% endblock %}
+
+
+{% block titre %}
+
+	Informations du profil
+{% endblock %}
