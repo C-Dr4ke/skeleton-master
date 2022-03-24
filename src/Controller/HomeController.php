@@ -14,6 +14,7 @@ use App\Repository\SubCategoryRepository;
 use App\Repository\UserRepository;
 use App\Service\Panier\PanierService;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping\Id;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -108,10 +109,13 @@ class HomeController extends AbstractController
     {
      
      $products = $repository->findAll();
-
+  
+   
      return $this->render('home/boissons.html.twig',[ 
       'products'=>$products
      ]);
+
+    
     }
 
     #[Route('/menu', name: 'Menu')]
@@ -128,14 +132,40 @@ class HomeController extends AbstractController
     #[Route('/detailProduct/{id}', name: 'detailProduct')]
     public function detailProduct(Product $product)
     {
-     
-    
-
      return $this->render('home/detailProduct.html.twig',[ 
       'product'=>$product
      ]);
     }
 
+    #[Route('/choixBoisson/{id}', name: 'choixBoisson')]
+    public function ChoixBoisson(ProductRepository $repository, $id)
+    {
+    
+    
+     $products = $repository->findAll();
+  
+   
+     return $this->render('home/choixBoisson.html.twig',[ 
+      'products'=>$products,
+      'id'=>$id
+      
+     ]);
+
+    
+    }
+    #[Route('/ajoutBoisson/{id}/{entry}', name: 'ajoutBoisson')]
+    public function ajoutBoisson(Product $product, $id, PanierService $panierService, $entry)
+    {
+     $param='boisson';
+    
+     
+     $panierService->add($id, $param, $entry );
+    // $panierService->getFullCart($id);
+
+     //dd($panierService);
+     return $this->redirectToRoute('Plats');
+    }
+    
 
     //************************************************************************************/
     //*********************************PANIER ***********************************//
@@ -150,6 +180,7 @@ class HomeController extends AbstractController
         $affiche = true;
         
      $panierWithData = $panierService->getFullCart();
+   
     $total =0;
      $total = $panierService->getTotal();
      
@@ -162,20 +193,32 @@ class HomeController extends AbstractController
      ]);
     }
 
-    #[Route('/addCart/{id}/{param}', name: 'addCart')]
-     public function addCart($id, PanierService $panierService, $param)
+    #[Route('/addCart/{id}/{param}' , name: 'addCart')]
+     public function addCart($id, PanierService $panierService,$param)
      {
-     
-    $panierService->add($id);
+         
+       
+        $entry=null;
+      if($param!=='cart'):
 
-    //   dd($session->get('panier'));
-    
-    if ($param == 'cart') {
+      $id= $panierService->add($id, $param,$entry );
+
+     else:
+       //dd('coucou');
+        $panierService->add($id, $param,$entry );
         return $this->redirectToRoute('cart');
+     endif;
+
+
+    
+   
+      if($param == 'boisson'  ) {
+        
+        return $this->redirectToRoute('choixBoisson', ['id'=>$id]);
     }
-    //  else {
-    //     return $this->redirectToRoute('carte');
-    // }
+    else if($param == 'carte' ) {
+        return $this->redirectToRoute('carte');
+    }
      }
  
      #[Route('/deleteCart/{id}', name: 'deleteCart')]
@@ -198,7 +241,7 @@ class HomeController extends AbstractController
 
      
     #[Route('/destroyCart', name: 'destroyCart')]
-    public function destroyCart(Request $request, PanierService $panierService)
+    public function destroyCart(PanierService $panierService)
     {
         //$request->cookies->set('panierDestroy',$panierService->fullCart());
 

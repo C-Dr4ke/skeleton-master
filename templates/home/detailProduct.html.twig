@@ -25,7 +25,7 @@
 			</div>
 			<div data-test-id="product-title" class="content column is-5-medium is-offset-1-medium">
 				<h1>
-					{{ product.title }}
+					{{ product.title }} 
 				</h1>
 
 				<p class="description"> {{product.description}}</p>
@@ -35,12 +35,19 @@
 					Prix
 				</h1>
 				<p class="description"> {{product.price}}€</p>
+				{% if product.subCategory.category.title == "Menu" %}
+			
+				<a href="{{ path('addCart', {'id': product.id,  param: 'boisson'}) }}" class="btn btn-primary rounded my-2">Commander</a>
 
-				<button type="button" href="{{ path('addCart', {'id': product.id,  param: 'detail' }) }}" data-bs-toggle="modal" data-bs-target="#choiceConfirm" class="cta cta-primary">
-					Commander
+		 
+				{% elseif product.subCategory.category.title == "Plats" %} 
+				<a href="{{ path('addCart', {'id': product.id,  param: 'boisson'}) }}" class="btn btn-primary rounded my-2">Commander</a>
+				
+				{% else %}
+					
+				<a href="{{ path('addCart', {'id': product.id,  param: 'carte'}) }}" class="btn btn-primary rounded my-2">Commander</a>
 
-					<!---->
-				</button>
+				{% endif %}
 			</div>
 		</div>
 	</section>
@@ -57,12 +64,14 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-      <small>Envie d'un dessert ?</small> 
+      <p><small>Ce produit à été ajouté au panier</small></p>  
+	  <small>Choisissez votre boisson ?</small> 
+	 
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary btn-sm rounded" data-bs-dismiss="modal"><i class="fa-solid fa-ban"></i> &nbsp;Annuler</button>
-        <a href="{{ path('deleteItem', { id:item.id }) }}" class="btn btn-danger btn-sm rounded text-decoration-none"><i class="fa-solid fa-trash-can"></i> &nbsp;Supprimer</a>
-      </div>
+      {# <div class="modal-footer">
+        <a href="{{ path('addCart', {'id': product.id,  param: 'carte', boisson: boisson.id }) }}" class="btn btn-primary btn-sm rounded"><i class="fa-solid fa-ban"></i> &nbsp;Non</button>
+        <a href="{{ path('addCart', {'id': product.id,  param: 'Dessert', boisson: boisson.id }) }}" class="btn btn-success btn-sm rounded text-decoration-none"><i class="fa-solid fa-trash-can"></i> &nbsp;Oui</a>
+      </div> #}
     </div>
   </div>
 </div>
