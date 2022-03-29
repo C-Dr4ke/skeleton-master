@@ -16,7 +16,10 @@
                             <label for="form_name">Prénom *</label>
                             <input id="form_name" type="text" name="name" class="form-control"
                                    placeholder="Veuillez saisir votre prénom *" required="required"
-                                   data-error="Firstname is required.">
+                                   data-error="Firstname is required." 
+                                   {% if app.user %}
+                                   value="{{ app.user.firstName }}"
+                                   {% endif %}>
                             <div class="help-block with-errors"></div>
                         </div>
                     </div>
@@ -25,7 +28,10 @@
                             <label for="form_lastname">Nom *</label>
                             <input id="form_lastname" type="text" name="surname" class="form-control"
                                    placeholder="Veuillez saisir votre nom *" required="required"
-                                   data-error="Lastname is required.">
+                                   data-error="Lastname is required."
+                                      {% if app.user %}
+                                   value="{{ app.user.LastName }}"
+                                   {% endif %}>
                             <div class="help-block with-errors"></div>
                         </div>
                     </div>
@@ -36,7 +42,10 @@
                             <label for="form_email">Email *</label>
                             <input id="form_email" type="email" name="email" class="form-control"
                                    placeholder="Veuillez saisir votre email *" required="required"
-                                   data-error="Valid email is required.">
+                                   data-error="Valid email is required."
+                                     {% if app.user %}
+                                   value="{{ app.user.email }}"
+                                   {% endif %}>
                             <div class="help-block with-errors"></div>
                         </div>
                     </div>
