@@ -7,10 +7,12 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Regex;
 
 class RegistrationType extends AbstractType
 {
@@ -30,10 +32,30 @@ class RegistrationType extends AbstractType
                 'label' => 'Email',
                 'attr' => ['placeholder' => 'Entrez votre email']
             ])
-            ->add('password', PasswordType::class, [
-                'label' => 'Mot de passe',
-                'attr' => ['placeholder' => 'Entrez votre mot de passe']
-
+            ->add('newPassword', RepeatedType::class, [
+                'type'=>PasswordType::class,
+                'mapped'=>false,
+                'invalid_message'=>'Les mots de passe ne sont pas identiques', 
+                'label'=>'Nouveau mot de passe',
+                'options'=>['attr'=>['class'=>'password']],
+                'required'=>true,
+                'first_options'=>[
+                    'label'=>'Nouveau mot de passe',
+                    'attr'=>[
+                        'placeholder'=>''
+                    ],
+                        'constraints'=>[
+                            new Regex([
+                                'pattern' =>'/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
+                                'message' =>"Le mot de passe doit contenir 1 majuscule, 1 minuscule, 1 chiffre et un caractère spécial"
+                            ])
+                            ],
+                ],
+                'second_options'=>['label'=>'Confirmation du nouveau mot de passe',
+                'attr'=>[
+                    'placeholder'=>''
+                    ]
+                ]
             ])
 
 
@@ -103,6 +125,7 @@ class RegistrationType extends AbstractType
             'data_class' => User::class,
             'add' => false,
             'edit' => false
+          
         ]);
     }
 }

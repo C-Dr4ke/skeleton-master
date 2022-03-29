@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass:UserRepository::class)]
 class User implements PasswordAuthenticatedUserInterface, UserInterface
@@ -31,6 +31,10 @@ class User implements PasswordAuthenticatedUserInterface, UserInterface
      * @var string The hashed password
      */
     #[ORM\Column(type:"string")]
+         #[Assert\Regex(
+            pattern:"/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/",
+            message:"Le mot de passe doit contenir 1 majuscule, 1 minuscule, 1 chiffre et un caractère spécial"
+         )]     
     private $password;
 
     #[ORM\Column(type:"string", length:255)]
@@ -60,6 +64,9 @@ class User implements PasswordAuthenticatedUserInterface, UserInterface
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Order::class)]
     private $orders;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $token;
 
     public function __construct()
     {
@@ -286,6 +293,18 @@ class User implements PasswordAuthenticatedUserInterface, UserInterface
                 $order->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getToken(): ?string
+    {
+        return $this->token;
+    }
+
+    public function setToken(?string $token): self
+    {
+        $this->token = $token;
 
         return $this;
     }

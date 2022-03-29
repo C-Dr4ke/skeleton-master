@@ -20,7 +20,10 @@
 		
 		{{ form_row(form.lastname) }}
 
-		
+		<div class="form-group focused">
+		<label class="form-control-label" for="input-password">Mot de passe</label>
+		<p><a href="{{path('passwordModif')}}">Modifier mon mot de passe</a></p>
+		</div>
 		{{ form_row(form.email) }}
 
 		<!--  -->

@@ -16,11 +16,13 @@ use App\Service\Panier\PanierService;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\Id;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
@@ -254,12 +256,12 @@ class HomeController extends AbstractController
     //***********************************************************************************/
 
    
-    #[Route('/profil/{id}', name: 'profil')]
+    #[Route('/profil', name: 'profil')]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function profil(UserRepository $repository)
     {
 
-
+        
 
         return $this->render('home/profil.html.twig', []);
     }
@@ -286,6 +288,7 @@ class HomeController extends AbstractController
         return $this->render('home/modifProfil.html.twig', [
             'form' => $form->createView(),
             'titre' => 'Informations du profil',
+            'id'=>$id
         ]);
     }
 
@@ -327,11 +330,9 @@ class HomeController extends AbstractController
     //*********************************Commande ***********************************//
     //***********************************************************************************//
 
-    /**
-     * @Route("/order", name="order")
-     * @IsGranted("IS_AUTHENTICATED_FULLY")
-     * 
-     */
+   
+    #[Route('/order', name: 'order')]
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function order(EntityManagerInterface $manager, PanierService $panierService)
     {
         
@@ -370,5 +371,51 @@ class HomeController extends AbstractController
         return $this->redirectToRoute('home', []);
     }
 
+  //************************************************************************************/
+    //*********************************Mail ***********************************//
+    //***********************************************************************************/
+    
+    #[Route('emailForm', name: 'emailForm')]
+    public function emailForm()
+    {
+
+
+        return $this->render('home/email_form.html.twig', []);
+    }
+
+    #[Route('/emailSend', name: 'emailSend')]
+    public function emailSend(Request $request, MailerInterface $mailer)
+    {
+        if (!empty($_POST)) {
+
+            $message = $request->request->get('message');
+            $nom = $request->request->get('surname');
+            $prenom = $request->request->get('name');
+            $motif = $request->request->get('need');
+            $from = $request->request->get('email');
+
+            $email = (new TemplatedEmail())
+                ->from($from)
+                ->to('eatstorytest@gmail.com')
+                ->subject($motif)
+                ->htmlTemplate('home/email_template.html.twig');
+            $cid = $email->embedFromPath('logo.jpg', 'logo');
+
+            $email->context([
+                'message' => $message,
+                'nom' => $nom,
+                'prenom' => $prenom,
+                'subject' => $motif,
+                'from' => $from,
+                'cid' => $cid,
+                'liens' => 'http://127.0.0.1:8001',
+                'objectif' => 'Accéder au site'
+            ]);
+
+            $mailer->send($email);
+
+            return $this->redirectToRoute('home');
+        }
+    }
 
 }
