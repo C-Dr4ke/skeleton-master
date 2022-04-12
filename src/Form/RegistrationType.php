@@ -32,7 +32,7 @@ class RegistrationType extends AbstractType
                 'label' => 'Email',
                 'attr' => ['placeholder' => 'Entrez votre email']
             ])
-            ->add('newPassword', RepeatedType::class, [
+            ->add('password', RepeatedType::class, [
                 'type'=>PasswordType::class,
                 'mapped'=>false,
                 'invalid_message'=>'Les mots de passe ne sont pas identiques', 

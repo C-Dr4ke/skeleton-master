@@ -2,51 +2,71 @@
 
 {% block title %}Accueil
 {% endblock %}
+{% block main %}
 
+	<img src="{{ asset('Eat-Story-background.jpg') }}" alt="" style="width: 100%; height: 700px; margin-right: 0px; float: left; display: block;">
+
+{% endblock %}
 {% block body %}
 	<link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
-	<header class="bg-light py-5">
-		<div class="container px-4 px-lg-5 my-5">
-			<div class="text-center text-black">
-				<h1 class="display-4 fw-bolder">Accueil</h1>
+	<img src="{{ asset('assiete.png') }}" class="plate" alt="" style="width: 200px; height: ; margin-right: 0px;">
 
-			</div>
-		</div>
-	</header>
-	<a href="{{ path('logout') }}">deconnexion</a><br>
-	<a href="{{ path('login') }}">connexion</a><br>
-	<a href="{{ path('register') }}">inscription</a>
-	<!-- Section-->
-	<section class="py-5">
-		<div class="container px-4 px-lg-5 mt-5">
-			<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"></div>
-		</div>
-	</section>
+	<p>Notre restaurant Eat Story satisfait même les plus exigeants – vous serez conquis par des plats savoureux servis dans une atmosphère agréable. Restaurant authentique avec wifi: Vous serez ravis par nos plats variés et français préparés par nos cuisiniers à votre attention. Nous sommes réputés pour notre excellent fast-food et pour nos excellentes salades. Notre crème glacée rafraîchissante, nos gâteaux préparés avec amour et nos desserts divins feront votre bonheur le temps d’une pause ou au dessert. Que diriez-vous d’un déjeuner délicieux ou d’un dîner chez nous ? Le wifi est gratuit pour que vous puissiez surfer confortablement sur Internet. Besoins spécifiques dans votre alimentation ?: Nous essayons toujours d’offrir une sélection saine et intéressante de plats avec nos plats végétariens et halal. Vous serez surpris du nombre de possibilités de repas sains dont vous disposez. Service à emporter disponible: Contactez-nous et réservez dès maintenant.
+	</p>
 
-	{# A faire : 
-		- Mettre la div dans une boucle pour afficher tout les produits
-		- mettre dans le href : le lien vers le detail du produit quand il sera crée
-		- mettre de le src : product.picture
-		- dans la balise h1 mettre : product.title
-		- dans la balise p mettre : product.description
-		
-		 #}
-
+	<div class="title">
+		<h2>Nos Best Seller
+		</h2>
+	</div>
 
 	<div class="row  justify-content-between  mt-3">
 
 		{% for product in products %}
-			<div class="wrapper ms-0">
-				<a href=""/>
+			{% if product.subCategory.title == "Waffles Salés" %}
+
+				<div class="wrapper ms-0 {{ product.protein }}">
+					<a href="{{path('detailProduct', { id: product.id}) }}"/>
 					<div class="header">
 						<img src="{{ asset('upload/') }}{{ product.picture }}" alt="{{ product.title }}">
 					</div>
 					<h1 class="name">{{ product.title }}</h1>
 					<div class="border"></div>
-					<p class="info">{{product.description}}</p>
 				</a>
 			</div>
-		{% endfor %}
+		{% endif %}
+	{% endfor %}
+
+</div>
+
+<div class="row  justify-content-between  mt-3">
+
+	{% for product in products %}
+		{% if product.subCategory.title == "Waffles Salés" %}
+
+			<div class="wrapper ms-0 {{ product.protein }}">
+				<a href="{{path('detailProduct', { id: product.id}) }}"/>
+				<div class="header">
+					<img src="{{ asset('upload/') }}{{ product.picture }}" alt="{{ product.title }}">
+				</div>
+				<h1 class="name">{{ product.title }}</h1>
+				<div class="border"></div>
+			</a>
+		</div>
+	{% endif %}
+{% endfor %}</div><div class="title mt-4">
+<h2>Nous retrouver
+</h2></div>
+
+<div class="logo ">
+
+	<div>
+	<img src="{{ asset('assiete.png') }}" alt="" style="width: 200px;">
+	<p>Sur place</p>
 	</div>
-{% endblock %}
+	<div>
+		<img src="{{ asset('delivery.png') }}"alt="" style="width: 200px;">
+		<p>En livraison</p>
+	</div>
+	
+</div>{% endblock %}

@@ -1,0 +1,12 @@
+
+.plate {
+  margin-left: 40%;
+
+}
+
+.title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+

@@ -28,7 +28,7 @@ class Product
     #[Assert\NotBlank(message:"Veuillez saisir ce champs")]
     private $protein;
 
-    #[ORM\Column(type:"float")]
+    #[ORM\Column(type: 'decimal', precision: 10, scale: 2)]
     #[Assert\NotBlank(message:"Veuillez saisir ce champs")]
     private $price;
 

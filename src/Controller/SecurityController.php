@@ -53,7 +53,7 @@ class SecurityController extends AbstractController
 
 
     #[Route('/register', name: 'register')]
-    public function register(Request $request, EntityManagerInterface $manager, UserPasswordHasherInterface $hasher)
+    public function register(Request $request, EntityManagerInterface $manager, UserPasswordHasherInterface $hasher, MailerInterface $mailer)
     {
 
         $user = new User();
@@ -63,11 +63,33 @@ class SecurityController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) :
-
-            $mdp = $hasher->hashPassword($user, $user->getPassword());
+            
+            $mdp = $hasher->hashPassword($user,$form->get('password')->getData());
             $user->setPassword($mdp);
+            $mail=$user->getEmail();
             $manager->persist($user);
             $manager->flush();
+            
+            $email = (new TemplatedEmail())
+            ->from('eatstorytest@gmail.com')
+            ->to($mail)
+            ->subject('Activation de votre compte')
+            ->htmlTemplate('home/email_template.html.twig');
+        $cid = $email->embedFromPath('logo.jpg', 'logo');
+
+        $email->context([
+            'message' => "Bonjour, Félication pour la création de votre compte. Vous pouvez dès à présent vous connecter en cliquant sur le lien ci-dessous",
+            'nom' => $user->getLastname(),
+            'prenom' => $user->getFirstname(),
+            'subject' => 'Activation de votre compte',
+            'from' => '	eatstorytest@gmail.com',
+            'cid' => $cid,
+            'liens' => 'http://127.0.0.1:8001/login',
+            'objectif' => 'Activer votre compte'
+        ]);
+
+        $mailer->send($email);
+           
 
             $this->addFlash('success', 'Félicitation, votre inscription s\'est bien déroulée. Connectez vous à présent');
             return $this->redirectToRoute('login');

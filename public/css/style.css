@@ -68,3 +68,9 @@ html, body {
       color: white !important;
       background: black !important;
   }
+
+  .logo{
+     display: flex;
+     justify-content: space-between;
+   
+  }

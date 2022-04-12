@@ -2,17 +2,21 @@
 
 namespace App\Controller;
 
+use App\Entity\Address;
 use App\Entity\Delivery;
 use App\Entity\Detail;
 use App\Entity\Order;
 use App\Entity\Product;
+use App\Form\DeliveryAddressType;
 use App\Form\RegistrationType;
+use App\Repository\AddressRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\OrderRepository;
 use App\Repository\ProductRepository;
 use App\Repository\SubCategoryRepository;
 use App\Repository\UserRepository;
 use App\Service\Panier\PanierService;
+
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\Id;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -178,7 +182,7 @@ class HomeController extends AbstractController
     public function cart(PanierService $panierService)
     {
        
-       
+      
         $affiche = true;
         
      $panierWithData = $panierService->getFullCart();
@@ -337,7 +341,10 @@ class HomeController extends AbstractController
     {
         
         $panier = $panierService->getFullCart();
-       
+        
+
+
+
         $order = new Order();
         $order->setUser($this->getUser());
         $order->setDate(new \DateTime());
@@ -370,6 +377,46 @@ class HomeController extends AbstractController
 
         return $this->redirectToRoute('home', []);
     }
+
+    #[Route('orderInformations', name: 'orderInformations')]
+    public function orderInformations(PanierService $panierService, AddressRepository $repository)
+    {
+        $panierWithData = $panierService->getFullCart();
+        $address = $repository->findOneBy(['user' => $this->getUser()], ['id' => 'DESC']);
+       
+        $total =0;
+         $total = $panierService->getTotal();
+     
+     return $this->render('home/orderInformations.html.twig',[ 
+        'items'=>$panierWithData,
+        'total'=>$total,
+        'address'=>$address
+     ]);
+    }
+
+    #[Route('newDeliveryAddress', name: 'newDeliveryAddress')]
+    public function newDeliveryAddress(EntityManagerInterface $manager, Request $request)
+    {
+    
+        $address= new Address;
+        $form = $this->createForm(DeliveryAddressType::class, $address);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $address->setUser($this->getUser());
+            $manager->persist($address);
+            $manager->flush();
+            $this->addFlash('success', 'Addresse saisie');
+            return $this->redirectToRoute('orderInformations');
+        }  
+     
+     return $this->render('home/newDeliveryAddress.html.twig',[ 
+        'form' => $form->createView(),
+        
+     ]);
+    }
+
 
   //************************************************************************************/
     //*********************************Mail ***********************************//

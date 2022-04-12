@@ -8,6 +8,7 @@ use App\Entity\SubCategory;
 use App\Form\CategoryType;
 use App\Form\ProductType;
 use App\Form\SubCategoryType;
+use App\Repository\AddressRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\DeliveryRepository;
 use App\Repository\OrderRepository;
@@ -265,10 +266,11 @@ class AdminController extends AbstractController
      *
      */
     #[Route('/orderDetail/{id}', name: 'orderDetail')]
-    public function orderDetail(OrderRepository $orderRepository, DeliveryRepository $deliveryRepository, Request $request, EntityManagerInterface $manager, $id)
+    public function orderDetail(OrderRepository $orderRepository, Request $request, EntityManagerInterface $manager, AddressRepository $addressRepository, $id)
     {
 
         $order = $orderRepository->find($id);
+        $address = $addressRepository->find($id);
 
         if (!empty($_POST)) {
 
@@ -287,6 +289,7 @@ class AdminController extends AbstractController
 
         return $this->render('admin/orderDetail.html.twig', [
             'order' => $order,
+            'address'=>$address
         ]);
     }
 }

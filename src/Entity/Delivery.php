@@ -22,6 +22,9 @@ class Delivery
     #[ORM\OneToOne(mappedBy: 'delivery', targetEntity: Order::class, cascade: ['persist', 'remove'])]
     private $orders;
 
+    #[ORM\OneToOne(inversedBy: 'delivery', targetEntity: Address::class, cascade: ['persist', 'remove'])]
+    private $address;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,6 +72,18 @@ class Delivery
         }
 
         $this->orders = $orders;
+
+        return $this;
+    }
+
+    public function getAddress(): ?Address
+    {
+        return $this->address;
+    }
+
+    public function setAddress(?Address $address): self
+    {
+        $this->address = $address;
 
         return $this;
     }

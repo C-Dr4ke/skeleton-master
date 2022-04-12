@@ -6,12 +6,14 @@
 			{% block title %}Eat Story - Restaurant Alfortville | Américaine & Française cuisine près de moi | Réserver maintenant
 			{% endblock %}
 		</title>
-		<link rel="icon" href="../public/logo.jpg,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22></text></svg>">
+		<link rel="icon" href="{{ asset('logo.jpg') }}">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.1.1/lux/bootstrap.min.css" integrity="sha512-mOju8pKJzu/lzzsmSWS8MrvFTXE9JMdOmhsz4OzN4NNfkERAUt4M7qjVQTbrWpx5SAJCv6Z2mrGY20ta6W2n+Q==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 		<link
-		rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		rel="stylesheet" href="{{ asset('css/main.css') }}">
 		{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
 		{% block stylesheets %}
 			{{ encore_entry_link_tags('app') }}
@@ -23,63 +25,65 @@
 	</head>
 	<body>
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-			<div class="container-fluid">
-				<a class="navbar-brand" href="{{path('home')}}">Navbar</a>
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
 
-				<div class="collapse navbar-collapse" id="navbarColor03">
-					<ul class="navbar-nav me-auto">
-						{% if not app.user %}
-							<li class="nav-item">
-								<a class="nav-link btn btn-success text-dark" href="{{path('login')}}">Connexion</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link btn btn-primary text-white" href="{{path('register')}}">Inscription</a>
-							</li>
-						{% endif %}
-						<li class="nav-item">
-							<a class="nav-link" href="{{path('carte')}}">Notre carte</a>
-						</li>
-						{% if app.user and is_granted('ROLE_ADMIN') %}
-							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="{{path('category')}}" role="button" aria-haspopup="true" aria-expanded="false">BackOffice</a>
-								<div class="dropdown-menu">
-									<a class="dropdown-item" href="{{ path('listMenus') }}">Gestion des menus</a>
-									<a class="dropdown-item" href="{{ path('category') }}">Gestion des catégories</a>
-									<a class="dropdown-item" href="{{ path('subCategory') }}">Gestion des sous-catégories</a>
-									<a class="dropdown-item" href="{{ path('orderList') }}">Gestion des commandes</a>
+			<div class="container-fluid d-flex justify-content-between">
+			
+				<a href="{{path('home')}}"><img src="{{ asset('logo.jpg') }}" width="50px" alt="logo eat story"></a>
+				<div>
 
-									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="#">Separated link</a>
-								</div>
-							</li>
-						{% endif %}
-						<li class="nav-item">
-							<a class="nav-link" href="{{path('cart')}}">Panier</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="{{path('emailForm')}}">Nous contacter</a>
-						</li>
+					<a href="{{path('carte')}}">Notre carte</a>
+
+
+					<a href="{{path('emailForm')}}">Nous contacter</a>
+
+
+					{% if app.user and is_granted('ROLE_ADMIN') %}
+						<span class="dropdown">
+						<a class="  dropdown-toggle" data-bs-toggle="dropdown" href="{{path('category')}}" role="button" aria-haspopup="true" aria-expanded="false">BackOffice</a>
+						
+						<div class="dropdown-menu">
+							<a class="dropdown-item" href="{{ path('listMenus') }}">Gestion des menus</a>
+							<a class="dropdown-item" href="{{ path('category') }}">Gestion des catégories</a>
+							<a class="dropdown-item" href="{{ path('subCategory') }}">Gestion des sous-catégories</a>
+							<a class="dropdown-item" href="{{ path('orderList') }}">Gestion des commandes</a>
+
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="#">Separated link</a>
+						</div>
+						</span>
+					{% endif %}
+				</div>
+				<div>
+
+					<div>
 						{% if app.user %}
-							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Profil</a>
-								<div class="dropdown-menu">
-									<a class="dropdown-item" href="{{path('profil', { id:app.user.id }) }}">Voir mon profil</a>
-									<a class="dropdown-item" href="{{path('mesCommandes', { id:app.user.id })}}">Mes Commandes</a>
-									<a class="dropdown-item" href="{{path('logout')}}">Deconnexion</a>
-								</div>
-							</li>
-						{% endif %}
-					</ul>
-					<form class="d-flex">
-						<input class="form-control me-sm-2" type="text" placeholder="Search">
-						<button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-					</form>
+						<span class="dropdown">
+						<a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><img src="{{ asset('user.svg') }}" alt="panier" width="25px"></a>
+				
+						<div class="dropdown-menu">
+							<a class="dropdown-item" href="{{path('profil', { id:app.user.id }) }}">Voir mon profil</a>
+							<a class="dropdown-item" href="{{path('mesCommandes', { id:app.user.id })}}">Mes Commandes</a>
+							<a class="dropdown-item" href="{{path('logout')}}">Deconnexion</a>
+						</div>
+						</span>
+					{% endif %}
+
+					<a href="{{path('cart')}}"><img src="{{ asset('cart.svg') }}" alt="panier" width="30px"></a>
+
+					{% if not app.user %}
+
+						<a class="btn btn-success text-dark" href="{{path('login')}}">Connexion</a>
+
+						<a class="btn btn-primary text-white" href="{{path('register')}}">Inscription</a>
+
+					{% endif %}
+					
+				
 				</div>
 			</div>
 		</nav>
+		
+		{% block main %}{% endblock %}
 		<div class="container">
 			<div class="row mt-3 justify-content-center ">
 				<h1>
