@@ -133,11 +133,22 @@ class PanierService
 
             if (isset($detail['boisson'])) :
 
+                if($detail['boisson'] == null):
+
+                    $panierWithData[] = [
+                        'product' => $this->productRepository->find($detail['id']),
+                        'quantity' => $detail['quantite'],
+                        'drinks' => $this->productRepository->findOneBy(['id' => 9]),
+                    
+                    ];
+                else:
                 $panierWithData[] = [
                     'product' => $this->productRepository->find($detail['id']),
                     'quantity' => $detail['quantite'],
-                    'drinks' => $this->productRepository->find($detail['boisson'])
+                    'drinks' => $this->productRepository->find($detail['boisson']),
+
                 ];
+                endif;
             else :
                 
         // $this->session->remove('panier');

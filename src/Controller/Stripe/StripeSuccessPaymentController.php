@@ -47,11 +47,17 @@ class StripeSuccessPaymentController extends AbstractController
             $manager->merge($achat);
 
         endforeach;
-
+        // dd($address->getId());
+   
         $delivery->setAddress($address);
+        
         $manager->persist($order);
+   
         $manager->persist($delivery);
+        
         $manager->flush();
+    
+      
         $panierService->destroy();
         $this->addFlash('success', "Merci pour votre commande, Votre plat vous sera bientot livré, vous pouvez suivre l'état de votre commande dans votre espace membre");
 

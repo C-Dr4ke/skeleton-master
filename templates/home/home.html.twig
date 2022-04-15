@@ -12,7 +12,7 @@
 
 	<img src="{{ asset('assiete.png') }}" class="plate" alt="" style="width: 200px; height: ; margin-right: 0px;">
 
-	<p>Notre restaurant Eat Story satisfait même les plus exigeants – vous serez conquis par des plats savoureux servis dans une atmosphère agréable. Restaurant authentique avec wifi: Vous serez ravis par nos plats variés et français préparés par nos cuisiniers à votre attention. Nous sommes réputés pour notre excellent fast-food et pour nos excellentes salades. Notre crème glacée rafraîchissante, nos gâteaux préparés avec amour et nos desserts divins feront votre bonheur le temps d’une pause ou au dessert. Que diriez-vous d’un déjeuner délicieux ou d’un dîner chez nous ? Le wifi est gratuit pour que vous puissiez surfer confortablement sur Internet. Besoins spécifiques dans votre alimentation ?: Nous essayons toujours d’offrir une sélection saine et intéressante de plats avec nos plats végétariens et halal. Vous serez surpris du nombre de possibilités de repas sains dont vous disposez. Service à emporter disponible: Contactez-nous et réservez dès maintenant.
+	<p>Notre restaurant Eat Story satisfait même les plus exigeants – vous serez conquis par des plats savoureux servis dans une atmosphère agréable. Restaurant authentique avec wifi, Vous serez ravis par nos plats variés et français préparés par nos cuisiniers à votre attention. Nous sommes réputés pour notre excellent fast-food et pour nos excellentes salades. Notre crème glacée rafraîchissante, nos gâteaux préparés avec amour et nos desserts divins feront votre bonheur le temps d’une pause ou au dessert. Que diriez-vous d’un déjeuner délicieux ou d’un dîner chez nous ? Le wifi est gratuit pour que vous puissiez surfer confortablement sur Internet. Besoins spécifiques dans votre alimentation ? Nous essayons toujours d’offrir une sélection saine et intéressante de plats avec nos plats végétariens et halal. Vous serez surpris du nombre de possibilités de repas sains dont vous disposez. Service à emporter disponible: Contactez-nous et réservez dès maintenant.
 	</p>
 
 	<div class="title">
@@ -20,53 +20,73 @@
 		</h2>
 	</div>
 
-	<div class="row  justify-content-between  mt-3">
+	<div class="row  justify-content-evenly  mt-3">
 
 		{% for product in products %}
 			{% if product.subCategory.title == "Waffles Salés" %}
 
-				<div class="wrapper ms-0 {{ product.protein }}">
-					<a href="{{path('detailProduct', { id: product.id}) }}"/>
-					<div class="header">
+
+				<div class="card">
+					<div class="upper">
 						<img src="{{ asset('upload/') }}{{ product.picture }}" alt="{{ product.title }}">
 					</div>
-					<h1 class="name">{{ product.title }}</h1>
-					<div class="border"></div>
-				</a>
-			</div>
-		{% endif %}
-	{% endfor %}
+					<div class="lower">
+						<div class="card__left text-center">
+							<div class="food__title">
+								{{ product.title }}
+							</div>
+							{# <div class="food__desc text-center">
+								{{ product.description }}
+							</div> #}
+						</div>
 
-</div>
-
-<div class="row  justify-content-between  mt-3">
-
-	{% for product in products %}
-		{% if product.subCategory.title == "Waffles Salés" %}
-
-			<div class="wrapper ms-0 {{ product.protein }}">
-				<a href="{{path('detailProduct', { id: product.id}) }}"/>
-				<div class="header">
-					<img src="{{ asset('upload/') }}{{ product.picture }}" alt="{{ product.title }}">
+					</div>
 				</div>
-				<h1 class="name">{{ product.title }}</h1>
-				<div class="border"></div>
-			</a>
+			{% endif %}
+		{% endfor %}
+
+	</div>
+
+	<div class="row  justify-content-evenly  mt-3">
+
+		{% for product in products %}
+			{% if product.subCategory.title == "Waffles Salés" %}
+
+
+				<div class="card">
+					<div class="upper">
+						<img src="{{ asset('upload/') }}{{ product.picture }}" alt="{{ product.title }}">
+					</div>
+					<div class="lower">
+						<div class="card__left">
+							<div class="food__title text-center">
+								<p>{{ product.title }}</p>
+							</div>
+							{# <div class="food__desc text-center">
+						{{ product.description }}
+							</div> #}
+						</div>
+
+					</div>
+				</div>
+			{% endif %}
+		{% endfor %}
+	</div>
+	<div class="title mt-4">
+		<h2>Nous retrouver
+		</h2>
+	</div>
+
+	<div class="logo ">
+
+		<div>
+			<img src="{{ asset('assiete.png') }}" alt="" style="width: 200px;">
+			<p>Sur place</p>
 		</div>
-	{% endif %}
-{% endfor %}</div><div class="title mt-4">
-<h2>Nous retrouver
-</h2></div>
+		<div>
+			<img src="{{ asset('delivery.png') }}" alt="" style="width: 200px;">
+			<p>En livraison</p>
+		</div>
 
-<div class="logo ">
-
-	<div>
-	<img src="{{ asset('assiete.png') }}" alt="" style="width: 200px;">
-	<p>Sur place</p>
 	</div>
-	<div>
-		<img src="{{ asset('delivery.png') }}"alt="" style="width: 200px;">
-		<p>En livraison</p>
-	</div>
-	
-</div>{% endblock %}
+{% endblock %}

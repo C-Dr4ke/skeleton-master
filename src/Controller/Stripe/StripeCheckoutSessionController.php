@@ -30,10 +30,11 @@ class StripeCheckoutSessionController extends AbstractController
         if (!$panier) {
             return $this->redirectToRoute('home');
         }
+   
         Stripe::setApiKey('sk_test_51KicyHBoao3FmrU3GlRKLGlGCcArRJMXLNljmJfBtxPyiQ44YVETniqkCOSgC9uvL4RYvpkWD95B2iEmOqsYCAhT00I79Yv4Or');
         // dd($panier->getTotal());
         $session = Session::create([
-            
+         
             'line_items' => [[
                 
                 'price_data' => [
@@ -42,8 +43,10 @@ class StripeCheckoutSessionController extends AbstractController
                         'name' => $user->getUserIdentifier(),
                     ],
                     'unit_amount' => $panier->getTotal()*100,
+               
                 ],
                 'quantity' => 1,
+             
             ]],
             "mode" => 'payment',
             'success_url' => $this->generateURL('success_url',[],

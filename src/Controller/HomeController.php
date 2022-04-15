@@ -189,7 +189,7 @@ class HomeController extends AbstractController
    
     $total =0;
      $total = $panierService->getTotal();
-     
+   
     
     //  dd($panierWithData);
      return $this->render('home/cart.html.twig',[ 

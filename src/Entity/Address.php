@@ -43,7 +43,7 @@ class Address
     #[ORM\Column(type: 'text', nullable: true)]
     private $informations;
 
-    #[ORM\OneToOne(mappedBy: 'address', targetEntity: Delivery::class, cascade: ['persist', 'remove'])]
+    #[ORM\OneToMany(mappedBy: 'address', targetEntity: Delivery::class)]
     private $delivery;
 
     public function getId(): ?int

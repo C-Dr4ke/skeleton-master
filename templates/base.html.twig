@@ -30,12 +30,9 @@
 			
 				<a href="{{path('home')}}"><img src="{{ asset('logo.jpg') }}" width="50px" alt="logo eat story"></a>
 				<div>
-
+					
 					<a href="{{path('carte')}}">Notre carte</a>
-
-
 					<a href="{{path('emailForm')}}">Nous contacter</a>
-
 
 					{% if app.user and is_granted('ROLE_ADMIN') %}
 						<span class="dropdown">

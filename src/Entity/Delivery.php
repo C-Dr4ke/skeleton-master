@@ -22,7 +22,8 @@ class Delivery
     #[ORM\OneToOne(mappedBy: 'delivery', targetEntity: Order::class, cascade: ['persist', 'remove'])]
     private $orders;
 
-    #[ORM\OneToOne(inversedBy: 'delivery', targetEntity: Address::class, cascade: ['persist', 'remove'])]
+   
+    #[ORM\ManyToOne(targetEntity: Address::class, inversedBy: 'delivery')]
     private $address;
 
     public function getId(): ?int
