@@ -36,7 +36,7 @@
 							<td>
 								<img src="{{ asset('upload/') }}{{ item.product.picture }}" width="70" alt="{{ item.product.title }}">
 							</td>
-							<td>{{loop.index0}}
+							<td>
 								{{ item.product.title }}
 								<br>	
 								{{ item.drinks.title }}
@@ -61,13 +61,15 @@
 
 					{% else %}
 						<tr>
+							<td>
+								<img src="{{ asset('upload/') }}{{ item.product.picture }}" width="70" alt="{{ item.product.title }}">
+							</td>
+							
 							<td>{{ item.product.title }}
 
 							</td>
 							<td>{{ item.product.price | format_currency('EUR') }}</td>
-							<td>
-								<img src="{{ asset('upload/') }}{{ item.product.picture }}" width="70" alt="{{ item.product.title }}">
-							</td>
+						
 							<td>
 								<a href="{{ path('removeCart', {'id': loop.index }) }}" class="btn btn-primary">-</a>
 							</td>

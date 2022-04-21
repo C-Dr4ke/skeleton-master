@@ -38,6 +38,8 @@
 					<div class="border"></div>
 				</a>
 			</div>
+
+			
         {% endif %}
 		{% endfor %}
 	</div>
@@ -48,12 +50,12 @@
 		{% for product in products %}
         {% if product.subCategory.title == "Freez" %}
            
-		    <div class="wrapper ms-0">
-				<a href="{{path('detailProduct', { id: product.id}) }}"/>
+			    <div class="wrapper ms-0">
+				<a href="{{path('ajoutBoisson', { id: product.id, entry: id}) }}"/>
 					<div class="header">
 						<img src="{{ asset('upload/') }}{{ product.picture }}" alt="{{ product.title }}">
 					</div>
-					<h3 class="name">{{ product.title }}</h3>
+					<h1 class="name">{{ product.title }}</h1>
 					<div class="border"></div>
 				</a>
 			</div>

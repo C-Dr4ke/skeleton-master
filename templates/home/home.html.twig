@@ -27,6 +27,7 @@
 
 
 				<div class="card">
+					<a href="{{path('detailProduct', { id: product.id}) }}"/>
 					<div class="upper">
 						<img src="{{ asset('upload/') }}{{ product.picture }}" alt="{{ product.title }}">
 					</div>
@@ -36,57 +37,87 @@
 								{{ product.title }}
 							</div>
 							{# <div class="food__desc text-center">
-								{{ product.description }}
-							</div> #}
+																						{{ product.description }}
+																					</div> #}
 						</div>
 
 					</div>
+				</a>
+			</div>
+		{% endif %}
+	{% endfor %}
+
+</div>
+
+<div class="row  justify-content-evenly  mt-3">
+
+	{% for product in products %}
+		{% if product.subCategory.title == "Waffles Salés" %}
+
+
+			<div class="card">
+				<a href="{{path('detailProduct', { id: product.id}) }}"/>
+				<div class="upper">
+					<img src="{{ asset('upload/') }}{{ product.picture }}" alt="{{ product.title }}">
 				</div>
-			{% endif %}
-		{% endfor %}
-
-	</div>
-
-	<div class="row  justify-content-evenly  mt-3">
-
-		{% for product in products %}
-			{% if product.subCategory.title == "Waffles Salés" %}
-
-
-				<div class="card">
-					<div class="upper">
-						<img src="{{ asset('upload/') }}{{ product.picture }}" alt="{{ product.title }}">
-					</div>
-					<div class="lower">
-						<div class="card__left">
-							<div class="food__title text-center">
-								<p>{{ product.title }}</p>
-							</div>
-							{# <div class="food__desc text-center">
-						{{ product.description }}
-							</div> #}
+				<div class="lower">
+					<div class="card__left">
+						<div class="food__title text-center">
+							<p>{{ product.title }}</p>
 						</div>
-
+						{# <div class="food__desc text-center">
+																		{{ product.description }}
+																			</div> #}
 					</div>
+
 				</div>
-			{% endif %}
-		{% endfor %}
-	</div>
-	<div class="title mt-4">
-		<h2>Nous retrouver
-		</h2>
-	</div>
-
-	<div class="logo ">
-
-		<div>
-			<img src="{{ asset('assiete.png') }}" alt="" style="width: 200px;">
-			<p>Sur place</p>
+			</a>
 		</div>
-		<div>
-			<img src="{{ asset('delivery.png') }}" alt="" style="width: 200px;">
-			<p>En livraison</p>
-		</div>
+	{% endif %}
+{% endfor %}</div><div class="title mt-4">
+<h2>Nous retrouver
+</h2></div><div class="logo ">
+
+<div>
+	<img src="{{ asset('assiete.png') }}" alt="" style="width: 200px;">
+	<p>Sur place</p>
+</div>
+<div>
+	<img src="{{ asset('delivery.png') }}" alt="" style="width: 200px;">
+	<p>En livraison</p>
+</div></div><section class="footer">
+
+<div class="box-container">
+
+	<div class="box">
+		<i class="fas fa-phone"></i>
+		<h3>Téléphone</h3>
+		<p>01 43 68 47 26</p>
+	</div>
+
+	<div class="box">
+		<i class="fas fa-map-marker-alt"></i>
+		<h3>Adresse</h3>
+		<p>219 Rue Paul Vaillant Couturier 94140 Alfortville</p>
 
 	</div>
-{% endblock %}
+
+	<div class="box">
+		<i class="fas fa-clock"></i>
+		<h3>Horaires</h3>
+		<p>De 18h:30 jusqu'à 00:00</p>
+	</div>
+
+	<div class="box">
+		<i class="fas fa-envelope"></i>
+		<h3>Email</h3>
+		<p>eatstorytest@gmail.com</p>
+	</div>
+
+</div>
+
+<div class="credit">
+	&copy; copyright @ 2022 by
+	<span>Mr. Cédric TEMPLIER</span>
+	| all rights reserved!
+</div></section>{% endblock %}

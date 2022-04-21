@@ -1,0 +1,360 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTDXHTML1.0Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, initial-scale=1" name="viewport">
+		<meta name="x-apple-disable-message-reformatting">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta content="telephone=no" name="format-detection">
+		<title></title>
+
+		<link href="https://fonts.googleapis.com/css?family=Oswald:300,700&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="{{ asset('css/emailConfirmation.css') }}">
+
+	</head>
+
+	<body>
+		<div class="es-wrapper-color">
+
+			<table class="es-wrapper" width="100%" cellspacing="0" cellpadding="0">
+				<tbody>
+					<tr>
+						<td class="esd-email-paddings" valign="top">
+							<table cellpadding="0" cellspacing="0" class="es-header esd-header-popover" align="center">
+								<tbody>
+									<tr>
+										<td class="esd-stripe" align="center" bgcolor="#111517" style="background-color: #111517;" esd-custom-block-id="89423">
+											<table class="es-header-body" width="600" cellspacing="0" cellpadding="0" bgcolor="#111517" align="center" style="background-color: #111517;">
+												<tbody>
+													<tr>
+														<td class="esd-structure es-p25t es-p40b" align="left">
+															<table cellspacing="0" cellpadding="0" width="100%">
+																<tbody>
+																	<tr>
+																		<td class="es-m-p0r esd-container-frame" width="600" valign="top" align="center">
+																			<table width="100%" cellspacing="0" cellpadding="0">
+																				<tbody>
+																					<tr>
+																						<td align="center" class="esd-block-text">
+																							<a href="{{path('home')}}" class="logo"><img src="{{ asset('logo.jpg') }}" width="50px" alt="logo eat story"/></a>
+																						</td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</td>
+																	</tr>
+																</tbody>
+															</table>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<table cellpadding="0" cellspacing="0" class="es-content" align="center">
+								<tbody>
+									<tr>
+										<td class="esd-stripe" align="center" esd-custom-block-id="82644">
+											<table bgcolor="#ffffff" class="es-content-body" align="center" cellpadding="0" cellspacing="0" width="600">
+												<tbody>
+													<tr>
+														<td class="esd-structure es-p40t es-p40b es-p15r es-p15l" align="left" esd-custom-block-id="78476">
+															<table cellpadding="0" cellspacing="0" width="100%">
+																<tbody>
+																	<tr>
+																		<td width="570" class="esd-container-frame" align="center" valign="top">
+																			<table cellpadding="0" cellspacing="0" width="100%">
+																				<tbody>
+																					<tr>
+																						<td align="center" class="esd-block-text es-m-txt-l">
+																							<h3> Commande N°{{order}}</h3>
+																						</td>
+																					</tr>
+																					<tr>
+																						<td align="center" class="esd-block-text">
+																							<h1>Liste de la commande</h1>
+																						</td>
+																					</tr>
+																					<tr>
+																						<td align="center" class="esd-block-text">
+																							<h3>
+																								<span style="color:#ef0d33;">YOUR ORDER</span>
+																								HAS IS OUT FOR DELIVER.</h3>
+																						</td>
+																					</tr>
+																					<tr>
+																						<td align="center" class="esd-block-text es-m-txt-c es-p40t es-p40b">
+																							<p style="font-size: 18px; color: #999999;">Votre commande va être bientot traité</p>
+																							<p style="font-size: 18px; color: #999999;">Vous pourrez suivre le statut de votre commande dans votre espace.</p>
+																						</td>
+																					</tr>
+																					<tr>
+																						<td align="center" class="esd-block-button es-m-txt-c">
+																							<span class="msohide es-button-border">
+																								<a href="https://viewstripo.email/" class="es-button" target="_blank">Voir ma commande</a>
+																							</span>
+
+																						</td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</td>
+																	</tr>
+																</tbody>
+															</table>
+														</td>
+													</tr>
+													<tr>
+														<td class="esd-structure es-p20t es-p20b es-p20r es-p20l" esd-general-paddings-checked="false" align="left" style="background-position: center center; background-color: #ef0d33;" bgcolor="#ef0d33">
+
+															<table class="es-left" cellspacing="0" cellpadding="0" align="left">
+																<tbody>
+																	<tr>
+																		<td class="es-m-p0r esd-container-frame" width="178" valign="top" align="center">
+																			<table width="100%" cellspacing="0" cellpadding="0">
+																				<tbody>
+																					<tr class="es-mobile-hidden">
+																						<td class="esd-block-text" align="left">
+																							<h4 style="color: #ffffff;">PLATS</h4>
+																						</td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</td>
+																	</tr>
+																</tbody>
+															</table>
+
+															<table cellspacing="0" cellpadding="0" align="right">
+																<tbody>
+																	<tr>
+																		<td class="esd-container-frame" width="362" align="left">
+																			<table width="100%" cellspacing="0" cellpadding="0">
+																				<tbody>
+																					<tr>
+																						<td align="left" class="esd-block-text">
+																							<table style="width: 100%;" class="cke_show_border" cellspacing="1" cellpadding="1" border="0">
+																								<tbody>
+																									<tr>
+																										<td style="font-size: 13px;">
+																											<p style="color: #ffffff;">
+																												<strong>NOM</strong>
+																											</p>
+																										</td>
+																										<td style="text-align: center; font-size: 13px; line-height: 100%;" width="15%">
+																											<p style="color: #ffffff;">
+																												<strong>QTE</strong>
+																											</p>
+																										</td>
+																										<td style="text-align: center; font-size: 13px; line-height: 100%;" width="30%">
+																											<p style="color: #ffffff;">
+																												<strong>PRIX</strong>
+																											</p>
+																										</td>
+																									</tr>
+																								</tbody>
+																							</table>
+																						</td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</td>
+																	</tr>
+																</tbody>
+															</table>
+															<!--[if mso]></td></tr></table><![endif]-->
+														</td>
+													</tr>
+													{% if items is defined %}
+														{% for item in items %}
+
+
+															<tr>
+																<td class="esd-structure esdev-adapt-off es-p20t es-p15b es-p15r es-p15l" esd-general-paddings-checked="false" align="left" style="background-position: center top;">
+																	<table width="100%" cellpadding="0" cellspacing="0" class="esdev-mso-table">
+																		<tbody>
+																			<tr>
+																				<td class="esdev-mso-td" valign="top">
+																					<table class="es-left" cellspacing="0" cellpadding="0" align="left">
+																						<tbody>
+																							<tr>
+																								<td class="es-m-p0r esd-container-frame" width="120" valign="top" align="center">
+																									<table width="100%" cellspacing="0" cellpadding="0">
+																										<tbody>
+																											<tr>
+																												<td class="esd-block-image es-p20r" align="left" style="font-size:0">
+																													<a href target="_blank"><img src="{{ asset('upload/') }}{{ item.product.picture }}" alt="{{ item.product.title }}" title="{{ item.product.title }}" width="100" style="display: block;"></a>
+																												</td>
+																											</tr>
+																										</tbody>
+																									</table>
+																								</td>
+																							</tr>
+																						</tbody>
+																					</table>
+																				</td>
+																				<td class="esdev-mso-td" valign="top">
+																					<table cellspacing="0" cellpadding="0" align="right">
+																						<tbody>
+																							<tr>
+																								<td class="esd-container-frame" width="480" align="left">
+																									<table width="100%" cellspacing="0" cellpadding="0">
+																										<tbody>
+																											<tr>
+																												<td align="left" class="esd-block-text es-p10b">
+																													<table style="width: 100%;" class="cke_show_border" cellspacing="1" cellpadding="1" border="0">
+																														<tbody>
+																															<tr>
+																																<td>
+																																	<p>
+																																		<strong>
+																																			{{ item.product.title }}</strong>
+																																	</p>
+																																</td>
+																																<td style="text-align: center;" width="15%">
+																																	<p>{{ item.quantity }}</p>
+																																</td>
+																																<td style="text-align: center;" width="30%">
+																																	<p>{{ item.product.price * item.quantity }}€</p>
+																																</td>
+																															</tr>
+																														</tbody>
+																													</table>
+																												</td>
+																											</tr>
+																											<tr>
+																												{% if item.drinks is defined %}
+																													<td align="left" class="esd-block-text">
+																														<p style="color: #999999;">{{ item.drinks.title }}</p>
+																													</td>
+																												{% endif %}
+																											</tr>
+																										</tbody>
+																									</table>
+																								</td>
+																							</tr>
+																						</tbody>
+																					</table>
+																				</td>
+																			</tr>
+																		</tbody>
+																	</table>
+																</td>
+															</tr>
+															<tr>
+																<td class="esd-structure" align="left" style="background-position: center center;">
+																	<table cellpadding="0" cellspacing="0" width="100%">
+																		<tbody>
+																			<tr>
+																				<td width="600" class="esd-container-frame" align="center" valign="top">
+																					<table cellpadding="0" cellspacing="0" width="100%">
+																						<tbody>
+																							<tr>
+																								<td align="center" class="esd-block-spacer es-p5t es-p5b es-p15r es-p15l" style="font-size:0">
+																									<table border="0" width="100%" height="100%" cellpadding="0" cellspacing="0">
+																										<tbody>
+																											<tr>
+																												<td style="border-bottom: 1px solid #666666; background: none; height: 1px; width: 100%; margin: 0px;"></td>
+																											</tr>
+																										</tbody>
+																									</table>
+																								</td>
+																							</tr>
+																						</tbody>
+																					</table>
+																				</td>
+																			</tr>
+																		</tbody>
+																	</table>
+																</td>
+															</tr>
+														{% endfor %}
+													{% endif %}
+													<tr>
+														<td class="esd-structure es-p40t es-p40b es-p10r es-p10l" align="left">
+															<table cellpadding="0" cellspacing="0" width="100%">
+																<tbody>
+																	<tr>
+																		<td width="580" class="esd-container-frame" align="center" valign="top">
+																			<table cellpadding="0" cellspacing="0" width="100%">
+																				<tbody>
+																					<tr>
+																						<td align="right" class="esd-block-button ">
+
+
+																							<span class="es-button-border msohide">
+																							<strong><p>total : {{ total }}€</p></strong>
+																							</span>
+
+																						</td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</td>
+																	</tr>
+																</tbody>
+															</table>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<table cellpadding="0" cellspacing="0" class="es-content" align="center">
+								<tbody>
+									<tr>
+										<td class="esd-stripe" align="center" bgcolor="#ef0d33" style="background-color: #ef0d33;" esd-custom-block-id="78463">
+											<table bgcolor="transparent" class="es-content-body" align="center" cellpadding="0" cellspacing="0" width="600" style="background-color: transparent;">
+												<tbody>
+													<tr>
+														<td class="esd-structure es-p40t es-p40b es-p10r es-p10l" align="left">
+															<table cellpadding="0" cellspacing="0" width="100%">
+																<tbody>
+																	<tr>
+																		<td width="580" class="esd-container-frame" align="center" valign="top">
+																			<table cellpadding="0" cellspacing="0" width="100%">
+																				<tbody>
+																					<tr>
+																						<td align="center" class="esd-block-text es-infoblock es-m-txt-c">
+																							<h1 style="color: #ffffff;">WHERE DOES IT COME FROM?</h1>
+																						</td>
+																					</tr>
+																					<tr>
+																						<td align="center" class="esd-block-text es-infoblock es-m-txt-c es-p20t es-p20b">
+																							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+																						</td>
+																					</tr>
+																					<tr>
+																						<td align="center" class="esd-block-button es-infoblock">
+																							<span class="msohide es-button-border" style="background: #1b2a2f;">
+																								<a href="https://viewstripo.email/" class="es-button" target="_blank" style="color: #ffffff;">COMMANDER UN MENU</a>
+																							</span>
+
+																						</td>
+																					</tr>
+																				</tbody>
+																			</table>
+																		</td>
+																	</tr>
+																</tbody>
+															</table>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</body>
+</html>

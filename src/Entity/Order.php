@@ -28,6 +28,9 @@ class Order
     #[ORM\OneToOne(inversedBy: 'orders', targetEntity: Delivery::class, cascade: ['persist', 'remove'])]
     private $delivery;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $OrderNumber;
+
     public function __construct()
     {
         $this->details = new ArrayCollection();
@@ -100,6 +103,18 @@ class Order
     public function setDelivery(?Delivery $delivery): self
     {
         $this->delivery = $delivery;
+
+        return $this;
+    }
+
+    public function getOrderNumber(): ?string
+    {
+        return $this->OrderNumber;
+    }
+
+    public function setOrderNumber(?string $OrderNumber): self
+    {
+        $this->OrderNumber = $OrderNumber;
 
         return $this;
     }
