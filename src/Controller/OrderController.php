@@ -6,9 +6,11 @@ use App\Entity\Address;
 use App\Entity\Delivery;
 use App\Entity\Detail;
 use App\Entity\Order;
+use App\Form\DeliveryAddressType;
 use App\Repository\AddressRepository;
 use App\Service\Panier\PanierService;
 use Doctrine\ORM\EntityManagerInterface;
+use PhpParser\Node\Expr\Isset_;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,26 +18,28 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
+use function PHPUnit\Framework\isEmpty;
+
 class OrderController extends AbstractController
 {
 
     #[Route('/order', name: 'order')]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
+    #[IsGranted('ROLE_ADMIN')]
     public function order(EntityManagerInterface $manager, PanierService $panierService)
     {
         
         $panier = $panierService->getFullCart();
         
-
-
-
+        if(Isset( $panier)) {
+            return $this->redirectToRoute('home');
+        }
+     
         $order = new Order();
         $order->setUser($this->getUser());
         $order->setDate(new \DateTime());
 
-       
-        
-
+    
         $delivery = new Delivery();
 
         $delivery->setStatus("En attente de la Préparation");
@@ -63,9 +67,17 @@ class OrderController extends AbstractController
     }
 
     #[Route('orderInformations', name: 'orderInformations')]
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
+    
     public function orderInformations(PanierService $panierService, AddressRepository $repository)
     {
         $panierWithData = $panierService->getFullCart();
+       
+        if( !isset( $panierWithData)) {
+            dd($panierWithData); 
+            return $this->redirectToRoute('home');
+        }
+       
         $address = $repository->findOneBy(['user' => $this->getUser()], ['id' => 'DESC']);
        
         $total =0;
@@ -79,9 +91,15 @@ class OrderController extends AbstractController
     }
 
     #[Route('newDeliveryAddress', name: 'newDeliveryAddress')]
-    public function newDeliveryAddress(EntityManagerInterface $manager, Request $request)
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
+    public function newDeliveryAddress(EntityManagerInterface $manager, Request $request, PanierService $panierService)
     {
-    
+        $panierWithData = $panierService->getFullCart();
+          
+        if( !isset( $panierWithData)) {
+            return $this->redirectToRoute('home');
+        }
+
         $address= new Address;
         $form = $this->createForm(DeliveryAddressType::class, $address);
 
@@ -107,6 +125,7 @@ class OrderController extends AbstractController
     //***********************************************************************************/
     
     #[Route('emailForm', name: 'emailForm')]
+    #[IsGranted('ROLE_ADMIN')]
     public function emailForm()
     {
 
@@ -115,6 +134,7 @@ class OrderController extends AbstractController
     }
 
     #[Route('/emailSend', name: 'emailSend')]
+    #[IsGranted('ROLE_ADMIN')]
     public function emailSend(Request $request, MailerInterface $mailer)
     {
         if (!empty($_POST)) {

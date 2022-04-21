@@ -13,20 +13,13 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 class StripeCheckoutSessionController extends AbstractController
 {
 
-   
-    #[Route('/prepare', name: 'order_prepare')]
-    public function prepareAction()
-    {
-        return $this->render('security/prepare.html.twig');
-    }
 
 
     #[Route('/checkout', name: 'order_checkout')]
     public function checkout(PanierService $panier ): Response
     {
         
-        $YOUR_DOMAIN = "http://127.0.0.1:8001";
-        $user = $this->getUser();
+  
         if (!$panier) {
             return $this->redirectToRoute('home');
         }

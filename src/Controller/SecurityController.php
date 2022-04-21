@@ -16,6 +16,8 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\HttpFoundation\Cookie;
 
 class SecurityController extends AbstractController
 {
@@ -23,9 +25,10 @@ class SecurityController extends AbstractController
     #[Route('/login', name: 'login')]
     public function login(AuthenticationUtils $authenticationUtils, LoginFormAuthenticator $authenticator): Response
     {
-        // if ($this->getUser()) {
-        //     return $this->redirectToRoute('target_path');
-        // }
+        if ($this->getUser()) {
+        return $this->redirectToRoute('home');
+        }
+
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -47,7 +50,7 @@ class SecurityController extends AbstractController
 
     #[Route('/logout', name: 'logout')]
     public function logout(): void
-    {
+    {   
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 
@@ -104,6 +107,7 @@ class SecurityController extends AbstractController
     }
 
     #[Route('/passwordModif', name: 'passwordModif')]
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function passwordModif(UserPasswordHasherInterface $hasher, Request $request, EntityManagerInterface $manager): Response
     {
 

@@ -10,7 +10,6 @@ use App\Form\ProductType;
 use App\Form\SubCategoryType;
 use App\Repository\AddressRepository;
 use App\Repository\CategoryRepository;
-use App\Repository\DeliveryRepository;
 use App\Repository\OrderRepository;
 use App\Repository\ProductRepository;
 use App\Repository\SubCategoryRepository;
@@ -21,6 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class AdminController extends AbstractController
 {
@@ -38,6 +38,7 @@ class AdminController extends AbstractController
 
     #[Route('/category', name: 'category')]
     #[Route('/editCategory/{id}', name: 'editCategory')]
+    #[IsGranted('ROLE_ADMIN')]
     public function category(Request $request, EntityManagerInterface $manager, CategoryRepository $repository, $id = null)
     {
 
@@ -75,6 +76,7 @@ class AdminController extends AbstractController
     }
 
     #[Route('/deleteCategory/{id}', name: 'deleteCategory')]
+    #[IsGranted('ROLE_ADMIN')]
     public function deleteCategory(Category $category, EntityManagerInterface $manager)
     {
         $manager->remove($category);
@@ -91,6 +93,7 @@ class AdminController extends AbstractController
 
     #[Route('/subcategory', name: 'subCategory')]
     #[Route('/editSubCategory/{id}', name: 'editSubCategory')]
+    #[IsGranted('ROLE_ADMIN')]
     public function categorie(Request $request, EntityManagerInterface $manager, SubCategoryRepository $repository, $id = null)
     {
 
@@ -127,6 +130,7 @@ class AdminController extends AbstractController
     }
 
     #[Route('/deleteSubCategory/{id}', name: 'deleteSubCategory')]
+    #[IsGranted('ROLE_ADMIN')]
     public function deleteSubCategory(SubCategory $subCategory, EntityManagerInterface $manager)
     {
         $manager->remove($subCategory);
@@ -142,6 +146,7 @@ class AdminController extends AbstractController
 
 
     #[Route('/addMenu', name: 'addMenu')]
+    #[IsGranted('ROLE_ADMIN')]
     public function addMenu(Request $request, EntityManagerInterface $manager)
     {
       
@@ -180,6 +185,7 @@ class AdminController extends AbstractController
     
    
     #[Route('/listMenus', name: 'listMenus')]
+    #[IsGranted('ROLE_ADMIN')]
     public function listProduct(ProductRepository $repository)
     {
         $products = $repository->findAll();
@@ -191,6 +197,7 @@ class AdminController extends AbstractController
 
 
     #[Route('/editMenu/{id}', name: 'editMenu')]
+    #[IsGranted('ROLE_ADMIN')]
     public function editMenu(Request $request, EntityManagerInterface $manager, Product $product)
     {
      
@@ -234,6 +241,7 @@ class AdminController extends AbstractController
     }
 
     #[Route('/deleteMenu/{id}', name: 'deleteMenu')]
+    #[IsGranted('ROLE_ADMIN')]
     public function deleteProduct(EntityManagerInterface $manager, Product $product)
     {
         unlink($this->getParameter('upload_directory') . '/' . $product->getPicture());
@@ -251,6 +259,7 @@ class AdminController extends AbstractController
 
     
     #[Route('/orderList', name: 'orderList')]
+    #[IsGranted('ROLE_ADMIN')]
     public function orderList(OrderRepository $repository)
     {
 
@@ -266,6 +275,7 @@ class AdminController extends AbstractController
      *
      */
     #[Route('/orderDetail/{id}', name: 'orderDetail')]
+    #[IsGranted('ROLE_ADMIN')]
     public function orderDetail(OrderRepository $orderRepository, Request $request, EntityManagerInterface $manager, AddressRepository $addressRepository, $id)
     {
 
