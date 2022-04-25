@@ -6,7 +6,7 @@
 * {
    margin: 0;
    padding: 0;
-   /* font-family: ; */
+   font-family: Poppins; 
    text-decoration: none;
    outline: none;
    border: none;
@@ -16,6 +16,7 @@
    -ms-box-sizing: border-box;
    -o-box-sizing: border-box;
    box-sizing: border-box;
+   text-decoration: none !important;
 }
 
 img {
@@ -62,6 +63,13 @@ html, body {
       padding: 30px;
    }
 
+   .presentation{
+     font-size: 20px;
+     text-align: center;
+     margin-top: 2%;
+     margin-bottom: 2%;
+   }
+
    .invisible{
       display:none;
    }
@@ -91,6 +99,8 @@ html, body {
   border-radius: 30px;
   display: flex;
   flex-direction: column;
+  text-decoration: none;
+  margin-bottom: 10px;
 }
 
 .upper {
@@ -110,6 +120,7 @@ html, body {
   display: flex;
   width: 100%;
   flex: 1;
+  
 }
 .card__left {
   flex: 1;
@@ -119,12 +130,18 @@ html, body {
 }
 
 .food__title {
-  font-family: Poppins;
+
   font-style: normal;
   font-weight: 600;
-  font-size: 30px;
+  font-size: 20px;
   color: #000000;
+  
 
+ 
+
+}
+.lower .card__left .food__title p{
+  text-decoration: none !important;
 }
 
 .food__desc {
@@ -143,6 +160,15 @@ html, body {
   justify-content: center;
   align-items: center;
 }
+
+.dinnerChoice{
+  font-size: 25px;
+  display: flex;
+  justify-content: space-evenly;
+  text-align: center;
+}
+
+
 .add__item {
   display:flex;
   flex-direction:column;

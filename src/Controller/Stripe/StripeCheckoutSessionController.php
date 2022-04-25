@@ -53,7 +53,7 @@ class StripeCheckoutSessionController extends AbstractController
         Stripe::setApiKey('sk_test_51KicyHBoao3FmrU3GlRKLGlGCcArRJMXLNljmJfBtxPyiQ44YVETniqkCOSgC9uvL4RYvpkWD95B2iEmOqsYCAhT00I79Yv4Or');
         // dd($panier->getTotal());
         $session = Session::create([
-           
+            'customer_email'=> $this->getUser()->getEmail(),
             'line_items' => [ $products_for_stripe],
             "mode" => 'payment',
             'success_url' => $this->generateURL('success_url',[],
