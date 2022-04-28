@@ -83,7 +83,7 @@ class StripeSuccessPaymentController extends AbstractController
         
         
         $user = $this->getUser();
-        $mail= $user->getEmail();
+        $mail= $user->getUserIdentifier();
  
         $email = (new TemplatedEmail())
         ->from('eatstorytest@gmail.com')

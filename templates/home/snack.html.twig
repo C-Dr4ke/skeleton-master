@@ -24,19 +24,24 @@
 
 
     <h2> Petite Faim</h2>
-	<div class="row  justify-content-between  mt-3">
+	<div class="row  justify-content-evenly  mt-3">
 
 		{% for product in products %}
         {% if product.subCategory.title == "Petite Faim" %}
            
-		    <div class="wrapper ms-0">
-				<a href="{{path('detailProduct', { id: product.id}) }}"/>
-					<div class="header">
-						<img src="{{ asset('upload/') }}{{ product.picture }}" alt="{{ product.title }}">
+		   	<div class="card menuCard">
+					<a href="{{ path(category.title)}}"/>  
+					<div class="upper">
+						<img src="{{ asset(category.title) ~ ".png"}}" alt="{{ category.title }}"  style="height:250px;">
 					</div>
-					<h1 class="name">{{ product.title }}</h1>
-					<div class="border"></div>
-					<p class="info">{{product.description}}</p>
+					<div class="lower">
+						<div class="card__left text-center">
+							<div class="food__title">
+								{{category.title}}
+							</div>
+						</div>
+
+					</div>
 				</a>
 			</div>
         {% endif %}

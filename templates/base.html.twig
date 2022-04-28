@@ -6,7 +6,7 @@
 			{% block title %}Eat Story - Restaurant Alfortville | Américaine & Française cuisine près de moi | Réserver maintenant
 			{% endblock %}
 		</title>
-		<link rel="icon" href="{{ asset('logo.jpg') }}">
+		<link rel="icon" href="{{ asset('logo.png') }}">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.1.1/lux/bootstrap.min.css" integrity="sha512-mOju8pKJzu/lzzsmSWS8MrvFTXE9JMdOmhsz4OzN4NNfkERAUt4M7qjVQTbrWpx5SAJCv6Z2mrGY20ta6W2n+Q==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
@@ -23,95 +23,105 @@
 		{% endblock %}
 	</head>
 	<body>
-	
+
 		<header class="header">
 			<section class="flex">
-				<a href="{{path('home')}}" class="logo"><img src="{{ asset('logo.jpg') }}" width="45px" alt="logo eat story"/></a>
+				<a href="{{path('home')}}" class="logo"><img src="{{ asset('logo.png') }}" width="60px" alt="logo eat story"/></a>
 
 				<nav class="navbar">
-					<a href="{{path('home')}}">Acceuil</a>
+					<a href="{{path('home')}}">Accueil</a>
 					<a href="{{path('carte')}}">Notre carte</a>
 					<a href="{{path('emailForm')}}">Nous contacter</a>
 					{% if app.user and is_granted('ROLE_ADMIN') %}
 						<span class="dropdown">
-						<a class="  dropdown-toggle" data-bs-toggle="dropdown" href="{{path('category')}}" role="button" aria-haspopup="true" aria-expanded="false">BackOffice</a>
-						
-						<div class="dropdown-menu">
-							<a class="dropdown-item" href="{{ path('listMenus') }}">Gestion des menus</a>
-							<a class="dropdown-item" href="{{ path('category') }}">Gestion des catégories</a>
-							<a class="dropdown-item" href="{{ path('subCategory') }}">Gestion des sous-catégories</a>
-							<a class="dropdown-item" href="{{ path('orderList') }}">Gestion des commandes</a>
+							<a class="  dropdown-toggle" data-bs-toggle="dropdown" href="{{path('category')}}" role="button" aria-haspopup="true" aria-expanded="false">BackOffice</a>
 
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="#">Separated link</a>
-						</div>
+							<div class="dropdown-menu">
+								<a class="dropdown-item" href="{{ path('listMenus') }}">Gestion des menus</a>
+								<a class="dropdown-item" href="{{ path('category') }}">Gestion des catégories</a>
+								<a class="dropdown-item" href="{{ path('subCategory') }}">Gestion des sous-catégories</a>
+								<a class="dropdown-item" href="{{ path('orderList') }}">Gestion des commandes</a>
+
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="#">Separated link</a>
+							</div>
 						</span>
 					{% endif %}
 				</nav>
 
 				<div class="icons ">
-				<div id="menu-btn" class="fas fa-bars"></div>
+					<div id="menu-btn" class="fas fa-bars"></div>
 					{% if app.user %}
-					
-					<span class="dropdown">
-							<a class="dropdown-toggle" data-bs-toggle="dropdown" href="{{path('category')}}" role="button" aria-haspopup="true" aria-expanded="false"><div id="user-btn" class="fas fa-user"></div></a>
+
+						<span class="dropdown">
+							<a class="dropdown-toggle" data-bs-toggle="dropdown" href="{{path('category')}}" role="button" aria-haspopup="true" aria-expanded="false">
+								<div id="user-btn" class="fas fa-user"></div>
+							</a>
 
 							<div class="dropdown-menu">
-									<a class="dropdown-item" href="{{path('profil', { id:app.user.id }) }}">Voir mon profil</a>
-									<a class="dropdown-item" href="{{path('mesCommandes', { id:app.user.id })}}">Mes Commandes</a>
-									<a class="dropdown-item" href="{{path('logout')}}">Deconnexion</a>
-								</div>
+								<a class="dropdown-item" href="{{path('profil', { id:app.user.id }) }}">Voir mon profil</a>
+								<a class="dropdown-item" href="{{path('mesCommandes', { id:app.user.id })}}">Mes Commandes</a>
+								<a class="dropdown-item" href="{{path('logout')}}">Deconnexion</a>
+							</div>
 						</span>
 
 
 					{% endif %}
 
-					
+
 					{% if not app.user %}
-					
-					<span class="dropdown">
-							<a class="dropdown-toggle" data-bs-toggle="dropdown" href="{{path('category')}}" role="button" aria-haspopup="true" aria-expanded="false"><div id="user-btn" class="fa-solid fa-right-to-bracket"></div></a>
+
+						<span class="dropdown">
+							<a class="dropdown-toggle" data-bs-toggle="dropdown" href="{{path('category')}}" role="button" aria-haspopup="true" aria-expanded="false">
+								<div id="user-btn" class="fa-solid fa-right-to-bracket"></div>
+							</a>
 
 							<div class="dropdown-menu">
-									<a class="dropdown-item" href="{{path('register')}}">Inscription</a>
-									<a class="dropdown-item" href="{{path('login')}}">Connexion</a>
-								</div>
+								<a class="dropdown-item" href="{{path('register')}}">Inscription</a>
+								<a class="dropdown-item" href="{{path('login')}}">Connexion</a>
+							</div>
 						</span>
 
 
 					{% endif %}
-					<a href="{{path('cart')}}"><div id="cart-btn" class="fas fa-shopping-cart">
-						
+					<a href="{{path('cart')}}">
+						<div id="cart-btn" class="fas fa-shopping-cart"></div>
+					</a>
 					</div>
-				</div></a>
-			</section> 
+			</section>
 		</header>
 
 		{% block main %}{% endblock %}
-		<div class="container">
-			<div class="row mt-3 justify-content-center ">
-				<h1>
-					{% block titre %}{% endblock %}
-				</h1>
+		<div>
+			<div class="side-navbar">
+			
 			</div>
-			<!-- app.flashes est la variable où se trouve le message que l'on a configuer dans le cas ou on a bien entré les information du produit -->
-			{% for message in app.flashes('success') %}
-				<div class="alert alert-success text-center mx-auto">
-					{{ message }}
 
+			<div class="container">
+				<div class="row mt-3 justify-content-center ">
+					<h1>
+						{% block titre %}{% endblock %}
+					</h1>
 				</div>
+				<!-- app.flashes est la variable où se trouve le message que l'on a configuer dans le cas ou on a bien entré les information du produit -->
+				{% for message in app.flashes('success') %}
+					<div class="alert alert-success text-center mx-auto">
+						{{ message }}
 
-			{% endfor %}
+					</div>
 
-			{% for message in app.flashes('danger') %}
-				<div class="alert alert-danger text-center mx-auto">
-					{{ message }}
+				{% endfor %}
 
-				</div>
+				{% for message in app.flashes('danger') %}
+					<div class="alert alert-danger text-center mx-auto">
+						{{ message }}
 
-			{% endfor %}
+					</div>
 
-			{% block body %}{% endblock %}
+				{% endfor %}
+
+				{% block body %}{% endblock %}
+			</div>
 		</div>
 		<script src="{{ asset('js/main-script.js') }}"></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

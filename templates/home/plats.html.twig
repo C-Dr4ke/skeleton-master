@@ -34,18 +34,24 @@
     </div>
 
     <h2> Waffles Salés</h2>
-	<div class="row  justify-content-between  mt-3">
+	<div class="row justify-content-evenly  mt-3">
 
 		{% for product in products %}
         {% if product.subCategory.title == "Waffles Salés" %}
            
-		    <div class="wrapper ms-0 {{ product.protein }}">
-				<a href="{{path('detailProduct', { id: product.id}) }}"/>
-					<div class="header">
+		    	<div class="card">
+					<a href="{{path('detailProduct', { id: product.id}) }}"/>
+					<div class="upper">
 						<img src="{{ asset('upload/') }}{{ product.picture }}" alt="{{ product.title }}">
 					</div>
-					<h1 class="name">{{ product.title }}</h1>
-					<div class="border"></div>
+					<div class="lower">
+						<div class="card__left text-center">
+							<div class="food__title">
+								{{ product.title }}
+							</div>
+						</div>
+
+					</div>
 				</a>
 			</div>
         {% endif %}
@@ -53,18 +59,24 @@
 	</div>
 
     <h2> Waffles Salés Signatures</h2>
-	<div class="row  justify-content-between  mt-3">
+	<div class="row justify-content-evenly  mt-3">
 
 		{% for product in products %}
         {% if product.subCategory.title == "Waffles Salés Signatures" %}
            
-		    <div class="wrapper ms-0 {{ product.protein }}">
-				<a href="{{path('detailProduct', { id: product.id}) }}"/>
-					<div class="header">
+		  	<div class="card">
+					<a href="{{path('detailProduct', { id: product.id}) }}"/>
+					<div class="upper">
 						<img src="{{ asset('upload/') }}{{ product.picture }}" alt="{{ product.title }}">
 					</div>
-					<h1 class="name">{{ product.title }}</h1>
-					<div class="border"></div>
+					<div class="lower">
+						<div class="card__left text-center">
+							<div class="food__title">
+								{{ product.title }}
+							</div>
+						</div>
+
+					</div>
 				</a>
 			</div>
         {% endif %}
@@ -72,36 +84,48 @@
 	</div>
 
      <h2> Crêpes Salées Signatures</h2>
-	<div class="row  justify-content-between  mt-3">
+	<div class="row  justify-content-evenly mt-3">
 
 		{% for product in products %}
         {% if product.subCategory.title == "Crêpes Salées Signatures" %}
            
-		    <div class="wrapper ms-0 {{ product.protein }}">
-				<a href="{{path('detailProduct', { id: product.id}) }}"/>
-					<div class="header">
+		 	<div class="card">
+					<a href="{{path('detailProduct', { id: product.id}) }}"/>
+					<div class="upper">
 						<img src="{{ asset('upload/') }}{{ product.picture }}" alt="{{ product.title }}">
 					</div>
-					<h1 class="name">{{ product.title }}</h1>
-					<div class="border"></div>
+					<div class="lower">
+						<div class="card__left text-center">
+							<div class="food__title">
+								{{ product.title }}
+							</div>
+						</div>
+
+					</div>
 				</a>
 			</div>
         {% endif %}
 		{% endfor %}
 	</div>
      <h2> Compositions salées</h2>
-	<div class="row  justify-content-between  mt-3">
+	<div class="row justify-content-evenly mt-3">
 
 		{% for product in products %}
         {% if product.subCategory.title == "Compositions salées" %}
-           
-		    <div class="wrapper ms-0 {{ product.protein }}">
-				<a href="{{path('detailProduct', { id: product.id}) }}"/>
-					<div class="header">
+          	
+				<div class="card">
+					<a href="{{path('detailProduct', { id: product.id}) }}"/>
+					<div class="upper">
 						<img src="{{ asset('upload/') }}{{ product.picture }}" alt="{{ product.title }}">
 					</div>
-					<h1 class="name">{{ product.title }}</h1>
-					<div class="border"></div>
+					<div class="lower">
+						<div class="card__left text-center">
+							<div class="food__title">
+								{{ product.title }}
+							</div>
+						</div>
+
+					</div>
 				</a>
 			</div>
         {% endif %}

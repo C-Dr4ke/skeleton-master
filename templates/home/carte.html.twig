@@ -17,20 +17,26 @@
 
 
 
-	<div class="row  justify-content-between  mt-3">
-
+	<div class="row  justify-content-evenly  mt-3">
+	
 		{% for category in categories %}
-				<div class="wrapper ms-0">
-				<a href="{{ path(category.title)}}"/>  
-					<div class="header">
-						<img src="" alt="{{ category.title }}">
+	
+
+			<div class="card menuCard">
+					<a href="{{ path(category.title)}}"/>  
+					<div class="upper">
+						<img src="{{ asset(category.title) ~ ".png"}}" alt="{{ category.title }}"  style="height:250px;">
 					</div>
-					<h1 class="name">{{ category.title }}</h1>
-					<div class="border"></div>	
+					<div class="lower">
+						<div class="card__left text-center">
+							<div class="food__title">
+								{{category.title}}
+							</div>
+						</div>
+
+					</div>
 				</a>
 			</div>
-
-
 			
 		{% endfor %}
 	</div>
