@@ -5,9 +5,6 @@
 
 {% block body %}
 	<link rel="stylesheet" href="{{ asset('css/style.css') }}">
-
-	
-	
 	<!-- Section-->
 	<section class="py-5">
 		<div class="container px-4 px-lg-5 mt-5">
@@ -15,29 +12,20 @@
 		</div>
 	</section>
 
-
-
 	<div class="row  justify-content-evenly  mt-3">
-	
 		{% for category in categories %}
-	
-
 			<div class="card menuCard">
-					<a href="{{ path(category.title)}}"/>  
-					<div class="upper">
-						<img src="{{ asset(category.title) ~ ".png"}}" alt="{{ category.title }}"  style="height:250px;">
+				<a href="{{ path(category.title)}}"/>  
+				<div class="upper">
+					<img src="{{ asset(category.title) ~ ".png"}}" alt="{{ category.title }}"  style="height:250px;">
+				</div>
+				<div class="lower">
+					<div class="card__left text-center">
+						<div class="food__title">{{category.title}}</div>
 					</div>
-					<div class="lower">
-						<div class="card__left text-center">
-							<div class="food__title">
-								{{category.title}}
-							</div>
-						</div>
-
-					</div>
+				</div>
 				</a>
-			</div>
-			
+			</div>	
 		{% endfor %}
 	</div>
 {% endblock %}

@@ -115,7 +115,9 @@ p {
     opacity: 0.5;
     cursor: pointer
 }
-
+.button{
+    font-size: 12px;
+}
 @media (max-width: 767px) {
     .breadcrumb-item+.breadcrumb-item {
         padding-left: 0

@@ -3,6 +3,7 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
+<link rel="stylesheet" href="{{ asset('css/login.css') }}">
     <form method="post">
         {% if error %}
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -29,36 +30,15 @@
                                     <input type="password" name="password" id="inputPassword" class="form-control"
                                            autocomplete="current-password" required>
                                     <a href="{{ path('resetForm') }}">Mot de passe oublié ?</a>
-
-                                    <button class="btn mb-2 mt-3 mb-md-0 btn-outline-secondary btn-block" type="submit">
+                                      <button class="btn mb-2 mt-3 mb-md-0 btn-outline-secondary button" type="submit">
                                         Se connecter
                                     </button>
-                                </div>
-                            </div>
+                                </div> 
+                            </div>   
                         </div>
                     </div>
                 </div>
             </div>
-
         </section>
     </form>
-
-
-
-
-
-
-
-    {#
-    Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-    See https://symfony.com/doc/current/security/remember_me.html
-
-    <div class="checkbox mb-3">
-        <label>
-            <input type="checkbox" name="_remember_me"> Remember me
-        </label>
-    </div>
-    #}
-
-
 {% endblock %}

@@ -17,93 +17,49 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
-use function PHPUnit\Framework\isEmpty;
 
 class OrderController extends AbstractController
 {
-
-    #[Route('/order', name: 'order')]
-    #[IsGranted('IS_AUTHENTICATED_FULLY')]
-    #[IsGranted('ROLE_ADMIN')]
-    public function order(EntityManagerInterface $manager, PanierService $panierService)
-    {
-        
-        $panier = $panierService->getFullCart();
-        
-        if(Isset( $panier)) {
-            return $this->redirectToRoute('home');
-        }
-     
-        $order = new Order();
-        $order->setUser($this->getUser());
-        $order->setDate(new \DateTime());
-
-    
-        $delivery = new Delivery();
-
-        $delivery->setStatus("En attente de la Préparation");
-        $delivery->setDeliveryDate(new \DateTime('now'));
-        $order->setDelivery($delivery);
-
-        foreach ($panier as $item => $value) :
-            //dd($value['product']);
-            $achat = new Detail();
-            $achat->setProduct($value['product']);
-            $achat->setQuantity($value['quantity']);
-            $achat->setOrders($order);
-            $manager->merge($achat);
-
-        endforeach;
-
-
-        $manager->persist($order);
-        $manager->persist($delivery);
-        $manager->flush();
-        $panierService->destroy();
-        $this->addFlash('success', "Merci pour votre commande, Votre plat vous sera bientot livré, vous pouvez suivre l'état de votre commande dans votre espace membre");
-
-        return $this->redirectToRoute('home', []);
-    }
-
     #[Route('orderInformations', name: 'orderInformations')]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
-    
     public function orderInformations(PanierService $panierService, AddressRepository $repository)
     {
+        // Récupération du panier complet
         $panierWithData = $panierService->getFullCart();
-       
+        // Si le panier n'existe pas alors on ne peut pas avoir accès à cette page
         if( !isset( $panierWithData)) {
-            dd($panierWithData); 
             return $this->redirectToRoute('home');
         }
-       
+        // On récupère la dernière adresse utilisé par l'utilasteur lors de sa précédente commande
         $address = $repository->findOneBy(['user' => $this->getUser()], ['id' => 'DESC']);
-       
+        // Intitalisation du total à 0 
         $total =0;
-         $total = $panierService->getTotal();
+        // On récupère la somme totale de la commande
+        $total = $panierService->getTotal();
      
-     return $this->render('order/orderInformations.html.twig',[ 
-        'items'=>$panierWithData,
-        'total'=>$total,
-        'address'=>$address
-     ]);
+        return $this->render('order/orderInformations.html.twig',[ 
+            'items'=>$panierWithData,
+            'total'=>$total,
+            'address'=>$address
+        ]);
     }
 
     #[Route('newDeliveryAddress', name: 'newDeliveryAddress')]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function newDeliveryAddress(EntityManagerInterface $manager, Request $request, PanierService $panierService)
     {
+        // Récupération du panier complet
         $panierWithData = $panierService->getFullCart();
-          
+        // Si le panier n'existe pas alors on ne peut pas avoir accès à cette page  
         if( !isset( $panierWithData)) {
             return $this->redirectToRoute('home');
         }
-
+        // Création d'une nouvelle adresse de livraison
         $address= new Address;
         $form = $this->createForm(DeliveryAddressType::class, $address);
 
         $form->handleRequest($request);
-
+        // Si toutes les informations sont correctes alors on les rentre dans la BDD
         if ($form->isSubmitted() && $form->isValid()) {
             $address->setUser($this->getUser());
             $manager->persist($address);
@@ -111,24 +67,19 @@ class OrderController extends AbstractController
             $this->addFlash('success', 'Addresse saisie');
             return $this->redirectToRoute('orderInformations');
         }  
-     
-     return $this->render('order/newDeliveryAddress.html.twig',[ 
-        'form' => $form->createView(),
-        
-     ]);
+        return $this->render('order/newDeliveryAddress.html.twig',[ 
+            'form' => $form->createView(),
+        ]);
     }
 
-
-  //************************************************************************************/
-    //*********************************Mail ***********************************//
-    //***********************************************************************************/
+    //*************************************************************************************//
+    //************************************** Mail ****************************************//
+    //***********************************************************************************//
     
     #[Route('emailForm', name: 'emailForm')]
     #[IsGranted('ROLE_ADMIN')]
     public function emailForm()
     {
-
-
         return $this->render('home/email_form.html.twig', []);
     }
 
@@ -136,8 +87,8 @@ class OrderController extends AbstractController
     #[IsGranted('ROLE_ADMIN')]
     public function emailSend(Request $request, MailerInterface $mailer)
     {
+        // On récupère les infos pour l'envoie du mail
         if (!empty($_POST)) {
-
             $message = $request->request->get('message');
             $nom = $request->request->get('surname');
             $prenom = $request->request->get('name');

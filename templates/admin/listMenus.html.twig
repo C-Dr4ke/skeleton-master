@@ -17,24 +17,22 @@
 		</thead>
 		<tbody>
 
-			{% for product  in  products %}
-
-
-				<tr>
-					<th scope="row">{{ product.id }}</th>
-					<td>{{ product.title }}</td>
-                    <td>{{ product.description | slice(0,15) ~ '...' }}</td>
-                    <td>{{ product.protein }}</td>
-					<td>{{ product.price | format_currency('EUR') }}</td>
-					<td>
-						<img src="{{ asset('upload/') }}{{ product.picture }}" width="50" alt="{{ product.title }}">
-					</td>
-					<td>{{ product.subCategory.title }}</td>
-					<td>
-						<a href="{{ path('editMenu', { id:product.id }) }}"><img src="{{ asset('update.svg') }}" alt="modifier" width="25"></a>
-						<a href="{{ path('deleteMenu', {'id': product.id}) }}" onclick="return confirm('Etes-vous de vouloir supprimer ce menu')"><img src="{{ asset('delete.svg') }}" alt="supprimer" width="25"></a>
-					</td>
-				</tr>
+		{% for product  in  products %}
+			<tr>
+				<th scope="row">{{ product.id }}</th>
+				<td>{{ product.title }}</td>
+                <td>{{ product.description | slice(0,15) ~ '...' }}</td>
+                <td>{{ product.protein }}</td>
+				<td>{{ product.price | format_currency('EUR') }}</td>
+				<td>
+					<img src="{{ asset('upload/') }}{{ product.picture }}" width="50" alt="{{ product.title }}">
+				</td>
+				<td>{{ product.subCategory.title }}</td>
+				<td>
+					<a href="{{ path('editMenu', { id:product.id }) }}"><img src="{{ asset('update.svg') }}" alt="modifier" width="25"></a>
+					<a href="{{ path('deleteMenu', {'id': product.id}) }}" onclick="return confirm('Etes-vous de vouloir supprimer ce menu')"><img src="{{ asset('delete.svg') }}" alt="supprimer" width="25"></a>
+				</td>
+			</tr>
 
 			{% endfor %}
 
@@ -50,6 +48,5 @@
 
 
 {% block titre %}
-
 	Liste des produits
 {% endblock %}

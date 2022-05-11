@@ -14,19 +14,16 @@
 	<div class="pb-5">
 		{{ form_start(form) }}
 
-		
 		{{ form_row(form.firstname) }}
 
-		
 		{{ form_row(form.lastname) }}
 
 		<div class="form-group focused">
-		<label class="form-control-label" for="input-password">Mot de passe</label>
-		<p><a href="{{path('passwordModif')}}">Modifier mon mot de passe</a></p>
+			<label class="form-control-label" for="input-password">Mot de passe</label>
+			<p><a href="{{path('passwordModif')}}">Modifier mon mot de passe</a></p>
 		</div>
 		{{ form_row(form.email) }}
-
-		<!--  -->
+	
 		<label for="">N° de Rue</label>
 		{{ form_row(form.streetNumber) }}
 		
@@ -46,13 +43,9 @@
 			{{ form_row(form.submit) }}
 		</div>
 
-
 		{{ form_end(form) }}
-
 	</div>
 
-
-	
 	<script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/select2.js') }}"></script>
     <script>

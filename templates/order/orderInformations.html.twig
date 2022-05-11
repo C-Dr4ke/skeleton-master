@@ -64,9 +64,9 @@
                                  {% endif %}
                                 </div>
                                 {% if address is not empty %}
-                                   <p><b><a href="{{ path('newDeliveryAddress') }}" class="btn btn-success mt-5"> Changer addresse de Livraison </a></b> </p>
+                                   <p><b><a href="{{ path('newDeliveryAddress') }}" class="btn btn-success mt-5 button"> Changer addresse de Livraison </a></b> </p>
                                    {% else %}
-                                        <p><b><a href="{{ path('newDeliveryAddress') }}" class="btn btn-success mt-5">Nouvelle addresse de Livraison </a></b> </p>
+                                        <p><b><a href="{{ path('newDeliveryAddress') }}" class="btn btn-success mt-5 button">Nouvelle addresse de Livraison </a></b> </p>
                                     {% endif %}
                             </div>
                         </div>
@@ -93,9 +93,11 @@
                                     
                                     </div>
                                     <div class=" pl-0 flex-sm-col col-auto my-auto">
+                                        <p>Qté :</p>
                                         <p class="boxed-1">{{ item.quantity }}</p>
                                     </div>
                                     <div class=" pl-0 flex-sm-col col-auto my-auto ">
+                                     <p>Prix :</p>
                                         <p><b>{{ item.product.price * item.quantity }}€</b></p>
                                     </div>
                                 </div>
@@ -139,7 +141,7 @@
                                 </div>
                                 <div class="row mb-5 mt-4 ">
                                     {% if address is not empty %}
-                                        <div class="col-md-12 col-lg-6 mx-auto"><a href="{{ path('order_checkout')}}" class=" col-md-20 btn btn-warning mt-5">Payer</a></div>
+                                        <div class="col-md-12 col-lg-6 mx-auto"><a href="{{ path('order_checkout')}}" class=" col-md-20 btn btn-warning mt-5 button">Payer</a></div>
                                          
                                     {% endif %}
                                 </div>

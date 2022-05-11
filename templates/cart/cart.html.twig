@@ -1,88 +1,78 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
+<link rel="stylesheet" href="{{ asset('css/cart.css') }}">
 
 	{% if items is not empty %}
 
-		<table class="table table-dark">
+		<table class="table">
 			<thead>
 				<tr>
 					<th scope="col">Photo</th>
 					<th scope="col">Nom</th>
 					<th scope="col">Prix</th>
-				
-					<th scope="col">
-						<span class="btn btn-primary">-</span>
-					</th>
-					<th scope="col">quantité</th>
-					<th scope="col">
-						<span class="btn btn-primary">+</span>
-					</th>
-					<th scope="col">Supprimer</th>
-					<th scope="col">Total</th>
+					<th scope="col" class="text-center"></th>
+					<th scope="col" class="text-center">quantité</th>
+					<th scope="col" class="text-center"></th>
+					<th scope="col" class="text-center">Supprimer</th>
+					<th scope="col">Prix total</th>
 				</tr>
 			</thead>
 			<tbody>
-				<pre>
-					{{ dump(items) }}
-				</pre>
 				{% for item  in  items %}
-
-
+					{# Affiche les données si c'est un menu avec boisson #}
 					{% if item.drinks is defined %}
-
 						<tr>
-							<td>
+							<td data-label="Photo">
 								<img src="{{ asset('upload/') }}{{ item.product.picture }}" width="70" alt="{{ item.product.title }}">
 							</td>
-							<td>
+							<td data-label="Nom">
 								{{ item.product.title }}
 								<br>	
 								{{ item.drinks.title }}
 							</td>
-							<td>{{ item.product.price | format_currency('EUR') }}</td>
+							<td data-label="Prix">{{ item.product.price | format_currency('EUR') }}</td>
 
-							<td>
+							<td data-label="-" class="text-center">
 								<a href="{{ path('removeCart', {'id': loop.index }) }}" class="btn btn-primary">-</a>
 							</td>
-							<td class="text-center ">
+							<td class="text-center" data-label="Quantité">
 								<a href="" class="btn btn-light text-dark">{{ item.quantity }}</a>
 							</td>
-							<td>
+							<td data-label="+" class="text-center">
 								<a href="{{ path('addCart', {'id': loop.index , param: 'cart'}) }}" class="btn btn-primary">+</a>
 							</td>
-							<td class="text-center">
+							<td class="text-center" data-label="Supprimer">
 								<a href="{{ path('deleteCart', {'id': loop.index }) }}" onclick="return confirm('Etes-vous de vouloir supprimer cet article de votre panier')"><img src="{{ asset('delete.svg') }}" alt="supprimer" width="25"></a>
 							</td>
-							<td>{{ item.product.price * item.quantity }}
+							<td data-label="Prix total">{{ item.product.price * item.quantity }}
 								€</td>
 						</tr>
-
+					{# Affiche les données si c'est un menu sans boisson ou tout autre commande #}
 					{% else %}
 						<tr>
-							<td>
+							<td data-label="Photo">
 								<img src="{{ asset('upload/') }}{{ item.product.picture }}" width="70" alt="{{ item.product.title }}">
 							</td>
 							
-							<td>{{ item.product.title }}
+							<td data-label="Titre">{{ item.product.title }}
 
 							</td>
-							<td>{{ item.product.price | format_currency('EUR') }}</td>
+							<td data-label="Prix">{{ item.product.price | format_currency('EUR') }}</td>
 						
-							<td>
+							<td data-label="-" class="text-center">
 								<a href="{{ path('removeCart', {'id': loop.index }) }}" class="btn btn-primary">-</a>
 							</td>
-							<td class="text-center ">
+							<td class="text-center" data-label="Quantité">
 								<a href="" class="btn btn-light text-dark">{{ item.quantity }}</a>
 							</td>
-							<td>
+							<td data-label="+" class="text-center">
 								<a href="{{ path('addCart', {'id': loop.index, param: 'cart'}) }}" class="btn btn-primary">+</a>
 							</td>
-							<td class="text-center">
+							<td class="text-center" data-label="Delete">
 								<a href="{{ path('deleteCart', {'id': loop.index }) }}" onclick="return confirm('Etes-vous de vouloir supprimer cet article de votre panier')"><img src="{{ asset('delete.svg') }}" alt="supprimer" width="25"></a>
 							</td>
-							<td>{{ item.product.price * item.quantity }}
+							<td data-label="Prix total">{{ item.product.price * item.quantity }}
 								€</td>
 						</tr>
 
@@ -92,41 +82,20 @@
 			</tbody>
 		</table>
 
-		<h3>Total :
-			<span>{{ total }}</span>
-			€</h3>
-
+		<h2>Total de la commande :<span>{{ total | format_currency('EUR') }}</span></h2>
 		<a href="{{ path('destroyCart') }}" class="btn btn-danger mt-5" onclick="return confirm('Etes-vous de vouloir supprimer cet article de votre panier')">Vider le panier</a>
-
 		{% if app.user %}
-
 			<a href="{{ path('orderInformations') }}" class="btn btn-warning mt-5">Valider la commande</a>
-
-
 		{% else %}
-
 			<a href="{{ path('login') }}" class="btn btn-warning mt-5">Connectez vous pour passer à la commande</a>
-
 		{% endif %}
-		{% if affiche==true  %}{% endif %}
-
+		
 	{% else %}
-
 		<div class="text-center">
-			<h3>Votre panier est vide, allez vite consulter notre
-				<a class="btn btn-success rounded" href="{{ path('home') }}">catalogue</a>
-			</h3>
+			<h3>Votre panier est vide, allez vite consulter nos <a class="btn btn-success rounded" href="{{ path('home') }}">Plats</a> </h3>
 		</div>
-
-
 	{% endif %}
-
-
 {% endblock %}
-
 {% block title %}
 	{{ parent() }}
 {% endblock %}
-
-
-{% block titre %}{% endblock %}

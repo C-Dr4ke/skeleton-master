@@ -74,6 +74,7 @@ section{
    background-color: var(--white);
    box-shadow: var(--box-shadow);
    min-height: 100px !important;
+
 }
 
 .header .flex{
@@ -237,6 +238,7 @@ section{
    }
    .header .flex .navbar{
       position: absolute;
+      z-index: 1;
       top:99%; left:0; right:0;
       background-color: var(--white);
       border-top: var(--border);

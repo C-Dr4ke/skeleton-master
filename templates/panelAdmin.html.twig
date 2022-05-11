@@ -1,112 +1,110 @@
 <!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{% block title %}Eat Stoty BackOffice | {% endblock %}</title>
-    {% block stylesheets %}
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>{% block title %}Eat Stoty BackOffice | {% endblock %}</title>
+        {% block stylesheets %}
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.0.1/lux/bootstrap.min.css" integrity="sha512-EJJuqC8nbI+dUjDM89eZ8dVmckG/vAfKIhmW4pi3Y/S1gE8uvIHuPqpbZ3/DliUQOZbS0Wp7317zoPRRoX+E+A==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
-
-
-    {% endblock %}
-</head>
-<body >
-<div class="row justify-content-center p-2">
-    <div class="col-md-2 bg-white m-1">
-        <ul class="nav flex-column">
-            <li class="nav-item ms-5 mt-5">
-                <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                    <a href="" class="btn btn-primary  active"><i class="fas fa-user fa-2x"></i></a>
-                    <div class="btn-group" role="group">
-                        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="">
-                            <a class="dropdown-item" href="#">Profil</a>
-                            <a class="dropdown-item" href="{{ path('home') }}">Accès Front</a>
-                            <hr>
-                            <a class="dropdown-item" href="">Déconnexion</a>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item ms-2 mt-5">
-                <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                    <a href="{{ path('listMenus') }}" class="btn btn-primary  active">Gestion des menus</a>
-                    <div class="btn-group" role="group">
-                        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="">
-                            <a class="dropdown-item" href="{{ path('listMenus') }}">Liste des menus</a>
-                            <a class="dropdown-item" href="{{ path('addMenu') }}">Ajout de menus</a>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item ms-2 mt-3">
-                <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                    <a href="{{ path('category') }}" class="btn btn-primary  active">Gestion des catégories</a>
-                    <div class="btn-group" role="group">
-                        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="">
-                            <a class="dropdown-item" href="{{ path('category') }}">Liste des catégories</a>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            </li>
-            <li class="nav-item ms-2 mt-3">
-                <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                    <a href="{{ path('subCategory') }}" class="btn btn-primary  active">Gestion des sous-catégories</a>
-                    <div class="btn-group" role="group">
-                        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="">
-                            <a class="dropdown-item" href="{{ path('subCategory') }}">Liste des sous-catégories</a>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item ms-2 mt-3">
-                <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                    <a href="{{ path('orderList') }}" class="btn btn-primary  active">Gestion des commandes</a>
-                    <div class="btn-group" role="group">
-                        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="">
-                            <a class="dropdown-item" href="{{ path('orderList') }}">Liste des commandes</a>
-                        </div>
-                    </div>
-                </div>
-            </li>   
-        </ul>
-    </div>
-    <div class="col-md-9 bg-white m-1 table-responsive">
-
-        <div class="row justify-content-center mt-4 mb-4">
-            <div class="col text-center"><h1>{% block titre %}{% endblock %}</h1></div>
-        </div>
-        	{% for message in app.flashes('success') %}
-				<div class="alert alert-success text-center mx-auto">
-				{{ message }}
-				</div>
-			{% endfor %}
-
-			{% for message in app.flashes('danger') %}
-				<div class="alert alert-danger text-center mx-auto">
-					{{ message }}
-
-				</div>
-
-			{% endfor %}
-        {% block body %}
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.0.1/lux/bootstrap.min.css" integrity="sha512-EJJuqC8nbI+dUjDM89eZ8dVmckG/vAfKIhmW4pi3Y/S1gE8uvIHuPqpbZ3/DliUQOZbS0Wp7317zoPRRoX+E+A==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
         {% endblock %}
-    </div>
-</div>
+    </head>
+    <body>
+        <div class="row justify-content-center p-2">
+            <div class="col-md-2 bg-white m-1">
+                <ul class="nav flex-column">
+                    <li class="nav-item ms-5 mt-5">
+                        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                            <a href="" class="btn btn-primary  active"><i class="fas fa-user fa-2x"></i></a>
+                            <div class="btn-group" role="group">
+                                <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="">
+                                    <a class="dropdown-item" href="#">Profil</a>
+                                    <a class="dropdown-item" href="{{ path('home') }}">Accès Front</a>
+                                    <hr>
+                                    <a class="dropdown-item" href="">Déconnexion</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item ms-2 mt-5">
+                        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                            <a href="{{ path('listMenus') }}" class="btn btn-primary  active">Gestion des menus</a>
+                            <div class="btn-group" role="group">
+                                <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="">
+                                    <a class="dropdown-item" href="{{ path('listMenus') }}">Liste des menus</a>
+                                    <a class="dropdown-item" href="{{ path('addMenu') }}">Ajout de menus</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item ms-2 mt-3">
+                        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                            <a href="{{ path('category') }}" class="btn btn-primary  active">Gestion des catégories</a>
+                            <div class="btn-group" role="group">
+                                <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="">
+                                    <a class="dropdown-item" href="{{ path('category') }}">Liste des catégories</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    </li>
+                    <li class="nav-item ms-2 mt-3">
+                        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                            <a href="{{ path('subCategory') }}" class="btn btn-primary  active">Gestion des sous-catégories</a>
+                            <div class="btn-group" role="group">
+                                <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="">
+                                    <a class="dropdown-item" href="{{ path('subCategory') }}">Liste des sous-catégories</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item ms-2 mt-3">
+                        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                            <a href="{{ path('orderList') }}" class="btn btn-primary  active">Gestion des commandes</a>
+                            <div class="btn-group" role="group">
+                                <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="">
+                                    <a class="dropdown-item" href="{{ path('orderList') }}">Liste des commandes</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>   
+                </ul>
+            </div>
+            <div class="col-md-9 bg-white m-1 table-responsive">
 
-{% block javascripts %}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-{% endblock %}
+                <div class="row justify-content-center mt-4 mb-4">
+                    <div class="col text-center"><h1>{% block titre %}{% endblock %}</h1></div>
+                </div>
+                    {% for message in app.flashes('success') %}
+                        <div class="alert alert-success text-center mx-auto">
+                        {{ message }}
+                        </div>
+                    {% endfor %}
 
-</body>
+                    {% for message in app.flashes('danger') %}
+                        <div class="alert alert-danger text-center mx-auto">
+                            {{ message }}
+
+                        </div>
+
+                    {% endfor %}
+                {% block body %}
+
+                {% endblock %}
+            </div>
+        </div>
+
+        {% block javascripts %}
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+        {% endblock %}
+    </body>
 </html>

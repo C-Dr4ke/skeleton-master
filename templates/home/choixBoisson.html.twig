@@ -2,10 +2,8 @@
 
 {% block title %}Nos Boissons
 {% endblock %}
-
-{% block body %}
-	<link rel="stylesheet" href="{{ asset('css/style.css') }}">
-
+{% block main %}
+<link rel="stylesheet" href="{{ asset('css/style.css') }}">
 	<header class="bg-light py-5">
 		<div class="container px-4 px-lg-5 my-5">
 			<div class="text-center text-black">
@@ -22,45 +20,43 @@
 		</div>
 	</section>
 
-
     <h2>Les grands classiques</h2>
-	<div class="row  justify-content-between  mt-3">
-
+	<div class="row  justify-content-evenly  mt-3">
 		{% for product in products %}
         {% if product.subCategory.title == "Les grands classiques" %}
-           
-		    <div class="wrapper ms-0">
+			<div class="card" >
 				<a href="{{path('ajoutBoisson', { id: product.id, entry: id}) }}"/>
-					<div class="header">
-						<img src="{{ asset('upload/') }}{{ product.picture }}" alt="{{ product.title }}">
+				<div class="upper">
+					<img src="{{ asset('upload/') }}{{ product.picture }}" alt="{{ product.title }}">
+				</div>
+				<div class="lower">
+					<div class="card__left text-center">
+						<div class="food__title">{{ product.title }}</div>
 					</div>
-					<h1 class="name">{{ product.title }}</h1>
-					<div class="border"></div>
+				</div>
 				</a>
 			</div>
-
-			
         {% endif %}
 		{% endfor %}
 	</div>
 
-     <h2> Freez</h2>
+    <h2> Freez</h2>
 	<div class="row  justify-content-between  mt-3">
-
 		{% for product in products %}
         {% if product.subCategory.title == "Freez" %}
-           
 			    <div class="wrapper ms-0">
-				<a href="{{path('ajoutBoisson', { id: product.id, entry: id}) }}"/>
+					<a href="{{path('ajoutBoisson', { id: product.id, entry: id}) }}"/>
 					<div class="header">
 						<img src="{{ asset('upload/') }}{{ product.picture }}" alt="{{ product.title }}">
 					</div>
 					<h1 class="name">{{ product.title }}</h1>
 					<div class="border"></div>
-				</a>
-			</div>
+					</a>
+				</div>
         {% endif %}
 		{% endfor %}
 	</div>
 
+
 {% endblock %}
+{% block body %}{% endblock %}

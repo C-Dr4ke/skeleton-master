@@ -2,79 +2,58 @@
 
 {% block title %}Detail du Menu
 {% endblock %}
+{% block main %}
 
-{% block body %}
-<link rel="stylesheet" href="{{ asset('css/detailProduct.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/sideNavbar.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/detailProduct.css') }}">
 
-<div class="menu">
-	<section class="product-presentation">
-		<div class="columns is-medium">
-			<div class="column is-6-medium">
-				<div class="picture">
-					<div
-						class="responsive-img">
-						<!---->
-						<figure class="responsive-img-figureLoaded">
-							<picture>
-								<img src="{{ asset('upload/') }}{{ product.picture }}" alt="{{ product.title }}" width="600"></picture>
-							<!---->
-							<!---->
-						</figure>
+	<div class="forme">
+		<div class="sidenav">
+			<ul>
+				{# <li><a href="{{ path("Entrees")}}">Entrées</a></li> #}
+				<li><a href="{{ path("Snack")}}">Snack</a></li>
+				<li><a href="{{ path("Plats")}}">Plats</a></li>
+				<li><a href="{{ path("Menu")}}">Menu</a></li>
+				<li><a href="{{ path("Dessert")}}">Dessert</a></li>
+				<li><a href="{{ path("Boissons")}}">Boissons</a></li>
+			</ul>
+		</div>
+
+		<div class="productContainer">
+			<div class="menu">
+				<section class="product-presentation">
+					<div class="columns is-medium">
+						<div class="column is-6-medium">
+							<div class="picture">
+								<div class="responsive-img">
+									<figure class="responsive-img-figureLoaded">
+										<picture>
+											<img src="{{ asset('upload/') }}{{ product.picture }}" alt="{{ product.title }}" width="600">
+										</picture>
+									</figure>
+								</div>
+							</div>
+						</div>
+						<div data-test-id="product-title" class="content column is-5-medium is-offset-1-medium">
+							<h1>{{ product.title }}</h1>
+							<p class="description"> {{product.description}}</p>
+							<h1>Prix</h1>
+							<p class="description"> {{product.price}}€</p>
+							{% if product.subCategory.category.title == "Menu" %}
+								<a href="{{ path('addCart', {'id': product.id,  param: 'boisson'}) }}" class="btn btn-primary rounded button">Ajouter au panier</a>
+							{% elseif product.subCategory.category.title == "Plats" %} 
+								<a href="{{ path('addCart', {'id': product.id,  param: 'boisson'}) }}" class="btn btn-primary rounded button">Ajouter au panier</a>
+							{% else %}
+								<a href="{{ path('addCart', {'id': product.id,  param: 'carte'}) }}" class="btn btn-primary rounded button">Ajouter au panier</a>
+							{% endif %}
+						</div>
 					</div>
-				</div>
-			</div>
-			<div data-test-id="product-title" class="content column is-5-medium is-offset-1-medium">
-				<h1>
-					{{ product.title }} 
-				</h1>
-
-				<p class="description"> {{product.description}}</p>
-				<!---->
-
-				<h1>
-					Prix
-				</h1>
-				<p class="description"> {{product.price}}€</p>
-				{% if product.subCategory.category.title == "Menu" %}
-			
-				<a href="{{ path('addCart', {'id': product.id,  param: 'boisson'}) }}" class="btn btn-primary rounded my-2">Commander</a>
-
-		 
-				{% elseif product.subCategory.category.title == "Plats" %} 
-				<a href="{{ path('addCart', {'id': product.id,  param: 'boisson'}) }}" class="btn btn-primary rounded my-2">Commander</a>
-				
-				{% else %}
-					
-				<a href="{{ path('addCart', {'id': product.id,  param: 'carte'}) }}" class="btn btn-primary rounded my-2">Commander</a>
-
-				{% endif %}
+				</section>
 			</div>
 		</div>
-	</section>
-</div>
-
-
-
-{# Modal #}
-<div class="modal fade text-center" id="choiceConfirm" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content rounded-3">
-      <div class="modal-header">
-        <p class="modal-title" id="exampleModalLabel"><i class="fa-solid fa-trash-can"></i> CONFIRMATION</p>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-      <p><small>Ce produit à été ajouté au panier</small></p>  
-	  <small>Choisissez votre boisson ?</small> 
-	 
-      </div>
-      {# <div class="modal-footer">
-        <a href="{{ path('addCart', {'id': product.id,  param: 'carte', boisson: boisson.id }) }}" class="btn btn-primary btn-sm rounded"><i class="fa-solid fa-ban"></i> &nbsp;Non</button>
-        <a href="{{ path('addCart', {'id': product.id,  param: 'Dessert', boisson: boisson.id }) }}" class="btn btn-success btn-sm rounded text-decoration-none"><i class="fa-solid fa-trash-can"></i> &nbsp;Oui</a>
-      </div> #}
-    </div>
-  </div>
-</div>
+	</div>
 {% endblock %}
+{% block body %}{% endblock %}
 
 

@@ -13,6 +13,11 @@
    text-decoration: none !important;
 }
 
+
+h2{
+  font-size: 30px;
+  margin: 2% 2% 2% 2%;
+}
 .bgEatstory{
   
   
@@ -92,6 +97,8 @@ html, body {
   flex-direction: column;
   text-decoration: none;
   margin-bottom: 10px;
+  margin-left: 3%;
+  margin-right: 5%;
 }
 
 .upper {

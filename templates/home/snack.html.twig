@@ -2,50 +2,59 @@
 
 {% block title %}Nos Snack
 {% endblock %}
+{% block main %}
 
-{% block body %}
 	<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/sideNavbar.css') }}">
 
-	<header class="bg-light py-5">
-		<div class="container px-4 px-lg-5 my-5">
-			<div class="text-center text-black">
-				<h2 class="display-4 fw-bolder">Nos Snack</h2>
-
-			</div>
+	<div class="forme">
+		<div class="sidenav">
+			<ul>
+				{# <li><a href="{{ path("Entrees")}}">Entrées</a></li> #}
+				<li><a href="{{ path("Snack")}}">Snack</a></li>
+				<li><a href="{{ path("Plats")}}">Plats</a></li>
+				<li><a href="{{ path("Menu")}}">Menu</a></li>
+				<li><a href="{{ path("Dessert")}}">Dessert</a></li>
+				<li><a href="{{ path("Boissons")}}">Boissons</a></li>
+			</ul>
 		</div>
-	</header>
-	
-	<!-- Section-->
-	<section class="py-5">
-		<div class="container px-4 px-lg-5 mt-5">
-			<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"></div>
-		</div>
-	</section>
 
-
-    <h2> Petite Faim</h2>
-	<div class="row  justify-content-evenly  mt-3">
-
-		{% for product in products %}
-        {% if product.subCategory.title == "Petite Faim" %}
-           
-		   	<div class="card menuCard">
-					<a href="{{ path(category.title)}}"/>  
-					<div class="upper">
-						<img src="{{ asset(category.title) ~ ".png"}}" alt="{{ category.title }}"  style="height:250px;">
+		<div class="productContainer">
+			<header class="bg-light py-5" id="boisson">
+				<div class="container px-4 px-lg-5">
+					<div class="text-center text-black">
+						<h2 class="display-4 fw-bolder">Nos Snack</h2>
 					</div>
-					<div class="lower">
-						<div class="card__left text-center">
-							<div class="food__title">
-								{{category.title}}
-							</div>
+				</div>
+			</header>
+
+			<!-- Section-->
+			<section class="py-5">
+				<div class="container px-4 px-lg-5 mt-5">
+					<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"></div>
+				</div>
+			</section>
+
+ 			<h2> Petite Faim</h2>
+			<div class="row  justify-content-evenly  mt-3">
+				{% for product in products %}
+       				{% if product.subCategory.title == "Petite Faim" %}
+		   				<div class="card menuCard">
+							<a href="{{path('detailProduct', { id: product.id}) }}"/>  
+								<div class="upper">
+									<img src="{{ asset('upload/') }}{{ product.picture }}" alt="{{ product.title }}"  style="height:250px;">
+								</div>
+								<div class="lower">
+									<div class="card__left text-center">
+										<div class="food__title">{{product.title}}</div>
+									</div>
+								</div>
+							</a>
 						</div>
-
-					</div>
-				</a>
+        			{% endif %}
+				{% endfor %}
 			</div>
-        {% endif %}
-		{% endfor %}
+		</div>
 	</div>
-
 {% endblock %}
+{% block body %}{% endblock %}

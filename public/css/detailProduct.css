@@ -10,6 +10,7 @@
 *,
 :after,
 :before {
+  
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -100,7 +101,7 @@ html {
   margin-bottom: -10px;
 }
 .columns {
-  margin-left: -10px;
+  margin-left: 10%;
   margin-right: -10px;
   margin-top: -10px;
 }
@@ -142,37 +143,8 @@ html {
     margin-left: 8.3333333333%;
 }}
 
-.product-presentation .cta-primary {
-    margin-top: 32px;
-    align-self: flex-start;
+.button{
+  background-color: #a51223;
+  font-size: 15px;
 }
-.cta-primary {
-    background-color: #ffbc0d;
-    border: 1px solid transparent;
-    transition: background-color .3s ease-out;
-}
-@media only screen and (min-width: 1024px){
-.cta-primary, .cta-secondary {
-    width: auto;
-    padding: 0 64px;
-}}
-.cta-primary, .cta-secondary {
-    font-family: speedee_regular,Arial,sans-serif;
-    font-size: 1.6rem;
-    line-height: 1.3;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 64px;
-    border-radius: 4px;
-    color: #404040;
-    text-align: center;
-    text-decoration: none;
-    border: 1px solid transparent;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    -webkit-touch-callout: none;
-}
+

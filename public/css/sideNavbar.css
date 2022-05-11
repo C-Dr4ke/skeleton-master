@@ -1,0 +1,67 @@
+body {
+    font-family: "Lato", sans-serif;
+}
+
+.productContainer{
+    width : 100%;
+}
+
+.sidenav {
+
+    width: 20%;
+    background-color: #FFFF;
+    /* overflow-x: hidden; */
+    text-align: center;
+    padding-top: 60px;
+    box-shadow: var(--box-shadow);
+    margin-top: 1px;
+
+   
+   
+}
+
+.sidenav ul li a {
+    padding: 8px 8px 8px 8px;
+    font-size: 25px;
+    color: var(--black);
+}
+
+.sidenav ul li{
+    margin-top: 20px;
+    border-bottom: thin;
+    border-color: #f1f1f1;
+}
+
+
+
+.sidenav ul li::marker{
+
+    color:#FFFF;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+#boisson {
+    margin-top: 10%;
+}
+
+.forme{
+    display: flex;
+    justify-content: flex-start;
+   
+    
+}
+
+
+
+@media (max-width:768px){
+
+    .sidenav {
+
+    display: none;        
+    }
+
+}
+
