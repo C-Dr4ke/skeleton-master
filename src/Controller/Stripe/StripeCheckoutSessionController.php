@@ -37,7 +37,7 @@ class StripeCheckoutSessionController extends AbstractController
         ];
     }
     // Clé de paiment test de l'API Stripe
-    Stripe::setApiKey('sk_test_51KicyHBoao3FmrU3GlRKLGlGCcArRJMXLNljmJfBtxPyiQ44YVETniqkCOSgC9uvL4RYvpkWD95B2iEmOqsYCAhT00I79Yv4Or');
+    Stripe::setApiKey('api key');
 
     // Configuration des données qui seront renvoyées vers stripe
     $session = Session::create([
